@@ -20,6 +20,10 @@ Globals:
     # it has to be manually updated when you add resources to your application.
     # More information in https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary'
+    Runtime: nodejs10.x
+    MemorySize: 128
+    Timeout: 60
+    CodeUri: ./
 
 Parameters:
   AppId:
@@ -109,6 +113,26 @@ Resources:
           Properties:
             Path: /
             Method: POST
+
+  putUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/user/put-user.putUserHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UserTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref UserTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: POST
+
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
 
@@ -122,3 +146,37 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 2
         WriteCapacityUnits: 2
+
+  UserTable: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "Bio"
+          AttributeType: "S"
+        - 
+          AttributeName: "DateBirth"
+          AttributeType: "S"
+        - 
+          AttributeName: "AccountEmail"
+          AttributeType: "S"
+        - 
+          AttributeName: "ContactInformation"
+          AttributeType: "S"
+        - 
+          AttributeName: "AccessLevel"
+          AttributeType: "S"
+        - 
+          AttributeName: "ProfilePictureURL"
+          AttributeType: "S"
+        - 
+          AttributeName: "StudentID"
+          AttributeType: "N"
+      KeySchema: 
+        - 
+          AttributeName: "AccountEmail"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "3"
+        WriteCapacityUnits: "3"
+      TableName: "user"
