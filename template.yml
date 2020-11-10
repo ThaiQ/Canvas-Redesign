@@ -114,6 +114,7 @@ Resources:
             Path: /
             Method: POST
 
+  # These Lambda functions config associated with the source code: src/users
   putUser:
     Type: AWS::Serverless::Function
     Properties:
@@ -121,16 +122,52 @@ Resources:
       Policies:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
         - DynamoDBCrudPolicy:
-            TableName: !Ref UserTable
+            TableName: !Ref ProfileTable
       Environment:
         Variables:
           # Make table name accessible as environment variable from function code during execution
-          TABLE: !Ref UserTable
+          TABLE: !Ref ProfileTable
       Events:
         Api:
           Type: Api
           Properties:
             Path: /user
+            Method: POST                
+  getUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/user/get-user.getUserHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProfileTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref ProfileTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /getUser
+            Method: POST
+  deleteUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/user/delete-user.deleteUserHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProfileTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref ProfileTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /deleteUser
             Method: POST
 
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
@@ -147,36 +184,18 @@ Resources:
         ReadCapacityUnits: 2
         WriteCapacityUnits: 2
 
-  UserTable: 
+  ProfileTable: 
     Type: AWS::DynamoDB::Table
     Properties: 
-      AttributeDefinitions: 
-        - 
-          AttributeName: "Bio"
-          AttributeType: "S"
-        - 
-          AttributeName: "DateBirth"
-          AttributeType: "S"
-        - 
-          AttributeName: "AccountEmail"
-          AttributeType: "S"
-        - 
-          AttributeName: "ContactInformation"
-          AttributeType: "S"
-        - 
-          AttributeName: "AccessLevel"
-          AttributeType: "S"
-        - 
-          AttributeName: "ProfilePictureURL"
-          AttributeType: "S"
+      AttributeDefinitions:
         - 
           AttributeName: "StudentID"
           AttributeType: "N"
       KeySchema: 
         - 
-          AttributeName: "AccountEmail"
+          AttributeName: "StudentID"
           KeyType: "HASH"
       ProvisionedThroughput: 
         ReadCapacityUnits: "3"
         WriteCapacityUnits: "3"
-      TableName: "user"
+      TableName: "ProfileTable"

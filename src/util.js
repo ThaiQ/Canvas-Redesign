@@ -1,3 +1,5 @@
+const { CodeArtifact } = require("aws-sdk");
+
 var statusCode = {
     Success: 200,
     BadRequest: 400,
@@ -7,40 +9,59 @@ var statusCode = {
 }
 
 /**
- * Add callback to parameter if you want web call back. Though, callback will not run in test environment
  * Funtion always return reponse obj = {statusCode, body}
+ * Add callback if you want web call back
  * @param {int} statusCode - http protocol code
  * @param {obj} body - json obj
- * @param {method} callback - web callback function
+ * @param {func} callback - web call back funtion
  */
-function reponse(statusCode, body, callback){
+function reponseFormat(statusCode, body, callback){
     let obj = {
         statusCode: statusCode,
-        body
+        body: JSON.stringify(body)
     }
-    if (callback && process.env.NODE_ENV != 'test') callback(null, obj)
+    if (callback) process.env.NODE_ENV !== 'test' && callback(null, obj)
     return obj
 }
 
 /**
- * Return formated input for db calls
+ * Return formated input for db calls. 
+ * Leave item = null for db-put
+ * Leave key = null for db-get and delete
+ * Leave key = null and item = null for querying everything
  * @param {String} TableName 
  * @param {obj} Item 
+ * @param {obj} Key - Search Key
  */
-function input(TableName, Item){
-    return {
-        TableName,
-        Item,
+function inputFormat(TableName, Item, Key){
+    let obj = null;
+    if (Item) {
+        obj = {TableName, Item}
     }
-}
-
-/**
- * Return err obj
- * @param {String} message 
- */
-function errMessage(message){
-    let obj = {message}
+    else if (Key) {
+        obj = {TableName, Key}
+    }
+    else {
+        obj = {TableName}
+    }
     return obj
 }
 
-module.exports = {statusCode, reponse, input, errMessage}
+/**
+ * return error format
+ * Add callback if you want web call back
+ * @param {int} statusCode 
+ * @param {Strong} message 
+ * @param {func} callback - web call back funtion
+ */
+function errFormat(statusCode, message, callback){
+    let obj = 
+    {
+        statusCode,
+        message
+    }
+    reponseFormat(statusCode, obj, callback)
+    return obj
+}
+
+module.exports = {statusCode, reponseFormat, inputFormat, errFormat}

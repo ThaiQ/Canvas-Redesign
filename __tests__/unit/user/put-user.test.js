@@ -3,7 +3,7 @@ const dynamodb = require('aws-sdk/clients/dynamodb');
 // Import all functions from put-item.js
 const lambda = require('../../../src/user/put-user');
 
-const { statusCode } = require('../../../src/util')
+const { statusCode, reponseFormat } = require('../../../src/util')
 
 // This includes all tests for putItemHandler
 describe('Test putUserHandler', () => {
@@ -22,96 +22,61 @@ describe('Test putUserHandler', () => {
     });
 
     //Mock data
-    const objSuccess =
-    {
-        Bio: "Human",
-        DateBirth: Date.now,
-        AccountEmail: "emai@gmail.com",
-        ContactInformation: "",
-        AccessLevel: 1,
-        ProfilePictureURL: "URL",
-        StudentID: 123324231
-    }
-
-    const objUpdate =
-    {
-        Bio: "Human",
-        DateBirth: Date.now,
-        AccountEmail: "emai@gmail.com",
-        ContactInformation: "",
-        AccessLevel: 1,
-        ProfilePictureURL: "URL",
-        StudentID: 123324231
-    }
-
-    const objfail =
-    {
-        Bio: "Human",
-        DateBirth: Date.now,
-        ContactInformation: "",
-        AccessLevel: 1,
-        ProfilePictureURL: "URL",
-        StudentID: 123324231
-    }
+    const {objSuccess, objUpdate, objfail} = require('../../../MockData/user')
 
     // This test invokes putItemHandler and compares the result
-    it('should add item', () => {
+    it('should add item', async () => {
         // Return the specified value whenever the spied put function is called
         putSpy.mockReturnValue({
-            promise: () => Promise.resolve('data'),
+            promise: () => Promise.resolve(reponseFormat(statusCode.statusCode, objSuccess)),
         });
 
         const event = {
             httpMethod: 'POST',
-            body: objSuccess,
+            body: JSON.stringify(objSuccess),
         };
 
         // Invoke putItemHandler()
-        const result = lambda.putUserHandler(event);
+        const result = await lambda.putUserHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: 200,
             body: event.body,
         };
 
         // Compare the result with the expected result
-        expect(JSON.stringify(result)).toEqual(JSON.stringify(expectedResult));
+        expect(result).toEqual(expectedResult);
     });
 
-    it('should edit item', () => {
+    it('should edit item', async () => {
         // Return the specified value whenever the spied put function is called
         putSpy.mockReturnValue({
-            promise: () => Promise.resolve('data'),
+            promise: () => Promise.resolve(reponseFormat(statusCode.statusCode, objUpdate)),
         });
 
         const event = {
             httpMethod: 'POST',
-            body: objUpdate,
+            body: JSON.stringify(objUpdate),
         };
 
         // Invoke putItemHandler()
-        const result = lambda.putUserHandler(event);
+        const result = await lambda.putUserHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: 200,
             body: event.body,
         };
 
         // Compare the result with the expected result
-        expect(JSON.stringify(result)).toEqual(JSON.stringify(expectedResult));
+        expect(result).toEqual(expectedResult);
     });
 
-    it('should fail with a 405', () => {
-        // Return the specified value whenever the spied put function is called
-        putSpy.mockReturnValue({
-            promise: () => Promise.resolve('data'),
-        });
-
+    it('should fail with a 405', async () => {
         const event = {
             httpMethod: 'GET',
             body: objSuccess,
         };
 
         // Invoke putItemHandler()
-        const result = lambda.putUserHandler(event);
+        const result = await lambda.putUserHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: statusCode.MethodNotAllow
         };
@@ -120,19 +85,14 @@ describe('Test putUserHandler', () => {
         expect(result.statusCode).toEqual(expectedResult.statusCode);
     });
 
-    it('should fail with a 400', () => {
-        // Return the specified value whenever the spied put function is called
-        putSpy.mockReturnValue({
-            promise: () => Promise.resolve('data'),
-        });
-
+    it('should fail with a 400', async () => {
         const event = {
             httpMethod: 'POST',
             body: objfail,
         };
 
         // Invoke putItemHandler()
-        const result = lambda.putUserHandler(event);
+        const result = await lambda.putUserHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: statusCode.BadRequest
         };
