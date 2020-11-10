@@ -1,6 +1,6 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
 const db = new dynamodb.DocumentClient();
-const {reponse, input, statusCode} = require('../util')
+const {reponse, input, statusCode, errMessage} = require('../util')
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.TABLE;
 
@@ -9,10 +9,15 @@ const tableName = process.env.TABLE;
  */
 exports.putUserHandler = (event, context, callback) => {
     const { body, httpMethod, path } = event;
-    let response;
 
+    //Checking for errors
     if (httpMethod !== 'POST') {
-        throw new Error(`postMethod only accepts POST method, you tried: ${httpMethod} method.`);
+        const err = errMessage(`postMethod only accepts POST method, you tried: ${httpMethod} method.`)
+        return reponse(statusCode.MethodNotAllow, err, callback);
+    }
+    else if (!body.AccountEmail) {
+        const err = errMessage(`Missing AccountEmail.`)
+        return reponse(statusCode.BadRequest, err, callback);
     }
 
     // Get id and name from the body of the request
@@ -22,40 +27,22 @@ exports.putUserHandler = (event, context, callback) => {
     ContactInformation,
     AccessLevel,
     ProfilePictureURL,
-    StudentID} = JSON.parse(body);
-
-    // Creates a new item, or replaces an old item with a new item
-    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-    // const params = {
-    //     TableName: tableName,
-    //     Item: {Bio,
-    //         DateBirth,
-    //         AccountEmail,
-    //         ContactInformation,
-    //         AccessLevel,
-    //         ProfilePictureURL,
-    //         StudentID},
-    // };
-
-    const params = input(tableName, {Bio,
+    StudentID} = body;
+    
+    const req = {Bio,
         DateBirth,
         AccountEmail,
         ContactInformation,
         AccessLevel,
         ProfilePictureURL,
-        StudentID})
-
-    db.put(params, function(err, data) {
+        StudentID}
+    
+    // Creates a new item, or replaces an old item with a new item
+    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
+    db.put(input(tableName,req), function(err, data) {
         if (err) {
-            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
+            return reponse(err.statusCode, errMessage(err.message), callback);
         }
     });
-
-    reponse(statusCode.BadRequest, body);
-    reponse(statusCode.NotFound, body, callback);
-
-    //process.env.NODE_ENV != 'test' && callback(null, response)
-    return reponse(statusCode.Success, body, callback);
+    return reponse(statusCode.Success, req, callback);
 };
