@@ -26,8 +26,7 @@ const objfail =
     DateBirth: Date.now,
     ContactInformation: "",
     AccessLevel: 1,
-    ProfilePictureURL: "URL",
-    StudentID: 123324231
+    ProfilePictureURL: "URL"
 }
 
 module.exports = {objSuccess, objUpdate, objfail}

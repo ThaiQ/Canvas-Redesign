@@ -16,9 +16,6 @@ exports.getByIdHandler = async (event) => {
     if (httpMethod !== 'GET') {
         throw new Error(`getMethod only accept GET method, you tried: ${httpMethod}`);
     }
-    // All log statements are written to CloudWatch by default. For more information, see
-    // https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-logging.html
-    console.log('received:', JSON.stringify(event));
 
     // Get id from pathParameters from APIGateway because of `/{id}` at template.yml
     const { id } = pathParameters;
@@ -35,7 +32,5 @@ exports.getByIdHandler = async (event) => {
         statusCode: 200,
         body: JSON.stringify(Item),
     };
-
-    console.log(`response from: ${path} statusCode: ${response.statusCode} body: ${response.body}`);
     return response;
 };
