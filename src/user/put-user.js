@@ -26,8 +26,8 @@ exports.putUserHandler = async (event, context, callback) => {
     if (httpMethod !== 'POST') {
         return errFormat(statusCode.MethodNotAllow,`postMethod only accepts POST method, you tried: ${httpMethod} method.`,callback)
     }
-    else if (!AccountEmail) {
-        return errFormat(statusCode.BadRequest,`Missing AccountEmail.`,callback)
+    else if (!StudentID) {
+        return errFormat(statusCode.BadRequest,`Missing StudentID.`,callback)
     }
 
     if (!response){
