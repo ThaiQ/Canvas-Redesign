@@ -1,33 +1,33 @@
 // Import dynamodb from aws-sdk
 const dynamodb = require('aws-sdk/clients/dynamodb');
 // Import all functions from put-item.js
-const lambda = require('../../../src/user/delete-user');
+const lambda = require('../../../src/annoucement/put-annoucement');
 
 const { statusCode, reponseFormat } = require('../../../src/util')
 
 // This includes all tests for putItemHandler
-describe('Test deleteUserHandler', () => {
-    let deleteSpy;
+describe('Test putAnnoucementHandler', () => {
+    let putSpy;
 
     // One-time setup and teardown, see more in https://jestjs.io/docs/en/setup-teardown
     beforeAll(() => {
         // Mock DynamoDB put method
         // https://jestjs.io/docs/en/jest-object.html#jestspyonobject-methodname
-        deleteSpy = jest.spyOn(dynamodb.DocumentClient.prototype, 'delete');
+        putSpy = jest.spyOn(dynamodb.DocumentClient.prototype, 'put');
     });
 
     // Clean up mocks
     afterAll(() => {
-        deleteSpy.mockRestore();
+        putSpy.mockRestore();
     });
 
     //Mock data
-    const {objSuccess, objUpdate, objfail} = require('../../../MockData/user')
+    const {objSuccess, objUpdate, objfail} = require('../../../MockData/annoucement')
 
     // This test invokes putItemHandler and compares the result
-    it('should delete item', async () => {
+    it('should add item', async () => {
         // Return the specified value whenever the spied put function is called
-        deleteSpy.mockReturnValue({
+        putSpy.mockReturnValue({
             promise: () => Promise.resolve(reponseFormat(statusCode.statusCode, objSuccess)),
         });
 
@@ -37,27 +37,36 @@ describe('Test deleteUserHandler', () => {
         };
 
         // Invoke putItemHandler()
-        const result = await lambda.deleteUserHandler(event,"",()=>{});
-        const expectedResult = reponseFormat(statusCode.Success, {StudentID: objSuccess.StudentID})
+        const result = await lambda.putAnnoucementHandler(event,"",()=>{});
+        const expectedResult = {
+            statusCode: 200,
+            body: event.body,
+        };
 
         // Compare the result with the expected result
         expect(result).toEqual(expectedResult);
     });
 
-    it('should fail with a 400', async () => {
+    it('should edit item', async () => {
+        // Return the specified value whenever the spied put function is called
+        putSpy.mockReturnValue({
+            promise: () => Promise.resolve(reponseFormat(statusCode.statusCode, objUpdate)),
+        });
+
         const event = {
             httpMethod: 'POST',
-            body: objfail,
+            body: JSON.stringify(objUpdate),
         };
 
         // Invoke putItemHandler()
-        const result = await lambda.deleteUserHandler(event,"",()=>{});
+        const result = await lambda.putAnnoucementHandler(event,"",()=>{});
         const expectedResult = {
-            statusCode: statusCode.BadRequest
+            statusCode: 200,
+            body: event.body,
         };
 
         // Compare the result with the expected result
-        expect(result.statusCode).toEqual(expectedResult.statusCode);
+        expect(result).toEqual(expectedResult);
     });
 
     it('should fail with a 405', async () => {
@@ -67,9 +76,25 @@ describe('Test deleteUserHandler', () => {
         };
 
         // Invoke putItemHandler()
-        const result = await lambda.deleteUserHandler(event,"",()=>{});
+        const result = await lambda.putAnnoucementHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: statusCode.MethodNotAllow
+        };
+
+        // Compare the result with the expected result
+        expect(result.statusCode).toEqual(expectedResult.statusCode);
+    });
+
+    it('should fail with a 400', async () => {
+        const event = {
+            httpMethod: 'POST',
+            body: objfail,
+        };
+
+        // Invoke putItemHandler()
+        const result = await lambda.putAnnoucementHandler(event,"",()=>{});
+        const expectedResult = {
+            statusCode: statusCode.BadRequest
         };
 
         // Compare the result with the expected result
