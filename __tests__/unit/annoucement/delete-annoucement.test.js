@@ -1,12 +1,12 @@
 // Import dynamodb from aws-sdk
 const dynamodb = require('aws-sdk/clients/dynamodb');
 // Import all functions from put-item.js
-const lambda = require('../../../src/user/delete-user');
+const lambda = require('../../../src/annoucement/delete-annoucement');
 
 const { statusCode, reponseFormat } = require('../../../src/util')
 
 // This includes all tests for putItemHandler
-describe('Test deleteUserHandler', () => {
+describe('Test deleteAnnoucementHandler', () => {
     let deleteSpy;
 
     // One-time setup and teardown, see more in https://jestjs.io/docs/en/setup-teardown
@@ -22,7 +22,7 @@ describe('Test deleteUserHandler', () => {
     });
 
     //Mock data
-    const {objSuccess, objUpdate, objfail} = require('../../../MockData/user')
+    const {objSuccess, objUpdate, objfail} = require('../../../MockData/annoucement')
 
     // This test invokes putItemHandler and compares the result
     it('should delete item', async () => {
@@ -37,8 +37,8 @@ describe('Test deleteUserHandler', () => {
         };
 
         // Invoke putItemHandler()
-        const result = await lambda.deleteUserHandler(event,"",()=>{});
-        const expectedResult = reponseFormat(statusCode.Success, {StudentID: objSuccess.StudentID})
+        const result = await lambda.deleteAnnoucementHandler(event,"",()=>{});
+        const expectedResult = reponseFormat(statusCode.Success, {ID: objSuccess.ID})
 
         // Compare the result with the expected result
         expect(result).toEqual(expectedResult);
@@ -51,7 +51,7 @@ describe('Test deleteUserHandler', () => {
         };
 
         // Invoke putItemHandler()
-        const result = await lambda.deleteUserHandler(event,"",()=>{});
+        const result = await lambda.deleteAnnoucementHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: statusCode.BadRequest
         };
@@ -67,7 +67,7 @@ describe('Test deleteUserHandler', () => {
         };
 
         // Invoke putItemHandler()
-        const result = await lambda.deleteUserHandler(event,"",()=>{});
+        const result = await lambda.deleteAnnoucementHandler(event,"",()=>{});
         const expectedResult = {
             statusCode: statusCode.MethodNotAllow
         };
