@@ -6,6 +6,7 @@ const tableName = process.env.TABLE;
 
 /**
  * A simple example includes a HTTP post method to add one item to a DynamoDB table.
+ Nov16
  */
 exports.putUserHandler = async (event, context, callback) => {
     const { body, httpMethod, path } = event;
