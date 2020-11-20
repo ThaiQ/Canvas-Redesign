@@ -12,6 +12,9 @@
         "jest": "^24.7.1"
     },
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "start": "npm start --prefix Frontend",
+        "install-frontend": "npm install --prefix Frontend",
+        "deploy": "npm run deploy --prefix Frontend"
     }
 }
