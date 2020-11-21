@@ -28,7 +28,7 @@ function App() {
         >
           Learn React
         </a>
-        {user? <Logout /> : <Login location={'home'}/>}
+        {user? <Logout reload={true}/> : <Login reload={true}/>}
         {user? <Link to='/profile'>Profile</Link>:''}
       </header>
     </div>

@@ -10,7 +10,7 @@ export default function LoginHooks(props) {
     localStorage.setItem('user', JSON.stringify(res.profileObj));
     refreshTokenSetup(res);
     //checkLogin(res)
-    //if (props.location === 'home') window.location.reload(false)
+    if (props.reload === true) window.location.reload(false)
   };
 
   const onFailure = (res) => {

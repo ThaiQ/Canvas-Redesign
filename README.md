@@ -180,8 +180,14 @@ Requirements:
 Tests are defined in the \_\_tests__ folder in this project. Use `npm` to install the [Jest test framework](https://jestjs.io/) and run unit tests.
 
 ```bash
-my-application$ npm install
-my-application$ npm run test
+npm install
+npm run test
+```
+
+## Frontend
+```bash
+npm run install-frontend
+npm start
 ```
 
 ## Resources
