@@ -19,7 +19,7 @@ exports.putCourseHandler = async (event, context, callback) => {
     Description,
     Syllabus,
     Session,
-    ID,
+   
     } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
@@ -34,12 +34,11 @@ exports.putCourseHandler = async (event, context, callback) => {
         //combine them into an object
         const req = {
             CourseName,
-            CourseID,
             Description,
             Syllabus,
             Session,
-            ID : ID ? ID : 
-            crypto.createHash('sha1').update(CourseName+CourseID+Session+Discription+Syllabus).digest('hex')
+            CourseID : CourseID ? CourseID : 
+            crypto.createHash('sha1').update(CourseID).digest('hex')
         }
 
         // Creates a new item, or replaces an old item with a new item
