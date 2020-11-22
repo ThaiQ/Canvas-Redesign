@@ -19,7 +19,8 @@ exports.putAssignmentHandler = async (event, context, callback) => {
             DueDate,
             Category,
             Questions,
-            AssignmentID
+            AssignmentID,
+            Closed
         } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
@@ -39,7 +40,8 @@ exports.putAssignmentHandler = async (event, context, callback) => {
             DueDate,
             Category,
             Questions,
-            AssignmentID : AssignmentID ? AssignmentID : crypto.createHash('sha1').update(Description + Points + Category + Questions).digest('hex')
+            AssignmentID : AssignmentID ? AssignmentID : crypto.createHash('sha1').update(Description + Points + Category + Questions).digest('hex'),
+            Closed
         }
         
         // Creates a new item, or replaces an old item with a new item

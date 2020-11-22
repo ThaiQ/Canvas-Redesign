@@ -5,7 +5,8 @@ const objSuccess =
     DueDate: "11/10/2020",
     Category: "Quiz",
     Questions: ["Q1", "Q2", "Q3"],
-    AssignmentID: "asdf123"
+    AssignmentID: "asdf123",
+    Closed: "0"
 }
 
 const objUpdate =
@@ -15,7 +16,8 @@ const objUpdate =
     DueDate: "11/11/2020",
     Category: "Quiz",
     Questions: ["Q1", "Q2", "Q3", "Q4", "Q5"],
-    AssignmentID: "asdf123"
+    AssignmentID: "asdf123",
+    Closed: "1"
 }
 
 const objfail =
@@ -25,7 +27,8 @@ const objfail =
     DueDate: "11/10/2020",
     Category: "Quiz",
     Questions: ["Q1", "Q2", "Q3"],
-    AssignmentID: null
+    AssignmentID: null,
+    Closed: "0"
 }
 
 module.exports = {objSuccess, objUpdate, objfail}
