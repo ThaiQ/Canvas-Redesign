@@ -170,6 +170,25 @@ Resources:
             Path: /deleteUser
             Method: POST
 
+  # # These Lambda functions config associated with the source code: src/users
+  # putAssignment:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Handler: src/assignments/put-assignment.putAssignmentHandler
+  #     Policies:
+  #       # Give Create/Read/Update/Delete Permissions to the SampleTable
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref AssignmentTable
+  #     Environment:
+  #       Variables:
+  #         # Make table name accessible as environment variable from function code during execution
+  #         TABLE: !Ref AssignmentTable
+  #     Events:
+  #       Api:
+  #         Type: Api
+  #         Properties:
+  #           Path: /assignments
+  #           Method: POST
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
 
@@ -199,3 +218,19 @@ Resources:
         ReadCapacityUnits: "3"
         WriteCapacityUnits: "3"
       TableName: "ProfileTable"
+  
+  # AssignmentTable: 
+  #   Type: AWS::DynamoDB::Table
+  #   Properties: 
+  #     AttributeDefinitions:
+  #       - 
+  #         AttributeName: "AssignmentID"
+  #         AttributeType: "S"
+  #     KeySchema: 
+  #       - 
+  #         AttributeName: "AssignmentID"
+  #         KeyType: "HASH"
+  #     ProvisionedThroughput: 
+  #       ReadCapacityUnits: "3"
+  #       WriteCapacityUnits: "3"
+  #     TableName: "AssignmentTable"    
