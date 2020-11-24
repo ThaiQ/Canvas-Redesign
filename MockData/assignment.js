@@ -72,4 +72,23 @@ const questionTest =
     Closed: "0"
 }
 
-module.exports = {objSuccess, objUpdate, objfail, submissionTest, questionTest}
+const gradeTest =
+{
+    Description: "Midterm 1",
+    Points: "100",
+    DueDate: "11/10/2020",
+    Category: "Quiz",
+    Questions: [],
+    AssignmentID: "asdf123",
+    Submissions: [{
+        FilePath: "/user/documents/submission.txt",
+        Answers: ["A", "B", "A", "C", "D"],
+        Grade: ".95",
+        AssignmentID: "asdf123",
+        StudentID: "00000001",
+        SubmissionID: "1234asdf",
+    }],
+    Closed: "0"
+}
+
+module.exports = {objSuccess, objUpdate, objfail, submissionTest, questionTest, gradeTest}
