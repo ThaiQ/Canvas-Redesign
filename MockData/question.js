@@ -28,4 +28,14 @@ const objfail =
     QuestionID: null
 }
 
-module.exports = {objSuccess, objUpdate, objfail}
+const delQuestion =
+{
+    AssignmentID: "asdf123",
+    QuestionID: "021240a79466c7e6f91ac688317e055147b944e7\\"
+}
+
+const delQuestionFail = {
+    AssignmentID: "asdf123",
+    QuestionID: null
+}
+module.exports = {objSuccess, objUpdate, objfail, delQuestion, delQuestionFail}
