@@ -36,7 +36,7 @@ exports.putSubmissionHandler = async (event, context, callback) => {
         return errFormat(statusCode.BadRequest,`Missing SubmissionID.`,callback)
     }
     else if (!FilePath && !Answers) {
-        return errFormat(statusCode.BadRequest, `Missing FilePath and Answers.`, callback)
+        return errFormat(statusCode.BadRequest, `Missing Submission.`, callback)
     }
 
     if (!response){
@@ -56,20 +56,23 @@ exports.putSubmissionHandler = async (event, context, callback) => {
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#get-property
         req = await db.get(req).promise()
         var state = 0
+        var index = 0
         for (var i = 0; i < req.Submissions.length; i++) {
             if (req.Submissions[i].StudentID === submission.StudentID) {
                 req.Submissions[i] = submission
                 state = 1
+                index = i
             }
         }
         if (state == 0) {
+            index = req.Questions.length
             req.Submissions.push(submission)
         }
         // Creates a new item, or replaces an old item with a new item
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
         return await db.put(inputFormat(tableName,req)).promise().then(
             res => {
-                return reponseFormat(statusCode.Success, req.Submissions[0], callback)
+                return reponseFormat(statusCode.Success, req.Submissions[index], callback)
             }
         )
         .catch(

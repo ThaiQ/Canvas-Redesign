@@ -18,7 +18,8 @@ exports.putQuestionHandler = async (event, context, callback) => {
             Description,
             Points,
             QuestionType,
-            Answer
+            Answer,
+            QuestionID
         } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
@@ -28,25 +29,52 @@ exports.putQuestionHandler = async (event, context, callback) => {
     else if (!AssignmentID) {
         return errFormat(statusCode.BadRequest,`Missing AssignmentID.`,callback)
     }
+    else if (!Answer) {
+        return errFormat(statusCode.BadRequest,`Missing Answer.`,callback)
+    }
+    else if (!QuestionType) {
+        return errFormat(statusCode.BadRequest,`Missing Question Type.`,callback)
+    }
+    else if (!Description) {
+        return errFormat(statusCode.BadRequest,`Missing Description.`,callback)
+    }
 
     if (!response){
         //combine them into an object
-        const req = 
+        const question = 
         {
             AssignmentID,
             Description,
             Points,
             QuestionType,
-            Answer
+            Answer,
+            QuestionID : QuestionID ? QuestionID : crypto.createHash('sha1').update(AssignmentID + Description).digest('hex')
         }
-        
+        let req = null
+        req = inputFormat(tableName, null, {AssignmentID})
+        // Get 1 item from the table
+        // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#get-property
+        req = await db.get(req).promise()
+        var state = 0
+        var index = 0
+        for (var i = 0; i < req.Questions.length; i++) {
+            if (req.Questions[i].QuestionID === question.QuestionID) {
+                req.Questions[i] = question
+                state = 1
+                index = i
+            }
+        }
+        if (state == 0) {
+            index = req.Questions.length
+            req.Questions.push(question)
+        }
         // TODO: Find the correct entry in Assignment Table and deposit the question within the questions array for that entry
 
         // Creates a new item, or replaces an old item with a new item
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
         return await db.put(inputFormat(tableName,req)).promise().then(
             res => {
-                return reponseFormat(statusCode.Success, req, callback)
+                return reponseFormat(statusCode.Success, req.Questions[index], callback)
             }
         )
         .catch(

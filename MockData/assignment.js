@@ -4,7 +4,7 @@ const objSuccess =
     Points: "100",
     DueDate: "11/10/2020",
     Category: "Quiz",
-    Questions: ["Q1", "Q2", "Q3"],
+    Questions: [],
     AssignmentID: "asdf123",
     Submissions: [],
     Closed: "0"
@@ -16,7 +16,7 @@ const objUpdate =
     Points: "150",
     DueDate: "11/11/2020",
     Category: "Quiz",
-    Questions: ["Q1", "Q2", "Q3", "Q4", "Q5"],
+    Questions: [],
     AssignmentID: "asdf123",
     Submissions: [],
     Closed: "1"
@@ -28,7 +28,7 @@ const objfail =
     Points: null,
     DueDate: "11/10/2020",
     Category: "Quiz",
-    Questions: ["Q1", "Q2", "Q3"],
+    Questions: [],
     AssignmentID: null,
     Submissions: [],
     Closed: "0"
@@ -40,7 +40,7 @@ const submissionTest =
     Points: "100",
     DueDate: "11/10/2020",
     Category: "Quiz",
-    Questions: ["Q1", "Q2", "Q3"],
+    Questions: [],
     AssignmentID: "asdf123",
     Submissions: [{
         FilePath: "/user/documents/submission.txt",
@@ -53,4 +53,16 @@ const submissionTest =
     Closed: "0"
 }
 
-module.exports = {objSuccess, objUpdate, objfail, submissionTest}
+const questionTest =
+{
+    Description: "Midterm 1",
+    Points: "100",
+    DueDate: "11/10/2020",
+    Category: "Quiz",
+    Questions: [],
+    AssignmentID: "asdf123",
+    Submissions: [],
+    Closed: "0"
+}
+
+module.exports = {objSuccess, objUpdate, objfail, submissionTest, questionTest}
