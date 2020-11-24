@@ -16,6 +16,7 @@ exports.putSubmissionHandler = async (event, context, callback) => {
     const {
             FilePath,
             Answers,
+            Grade,
             AssignmentID,
             StudentID,
             SubmissionID
@@ -40,20 +41,35 @@ exports.putSubmissionHandler = async (event, context, callback) => {
 
     if (!response){
         //combine them into an object
-        const req = 
+        const submission = 
         {
             FilePath,
             Answers,
+            Grade,
             AssignmentID,
             StudentID,
             SubmissionID : SubmissionID ? SubmissionID : crypto.createHash('sha1').update(AssignmentID + StudentID).digest('hex')
         }
-        
+        let req = null
+        req = inputFormat(tableName, null, {AssignmentID})
+        // Get 1 item from the table
+        // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#get-property
+        req = await db.get(req).promise()
+        var state = 0
+        for (var i = 0; i < req.Submissions.length; i++) {
+            if (req.Submissions[i].StudentID === submission.StudentID) {
+                req.Submissions[i] = submission
+                state = 1
+            }
+        }
+        if (state == 0) {
+            req.Submissions.push(submission)
+        }
         // Creates a new item, or replaces an old item with a new item
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
         return await db.put(inputFormat(tableName,req)).promise().then(
             res => {
-                return reponseFormat(statusCode.Success, req, callback)
+                return reponseFormat(statusCode.Success, req.Submissions[0], callback)
             }
         )
         .catch(

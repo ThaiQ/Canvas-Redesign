@@ -8,12 +8,13 @@ const { statusCode, reponseFormat } = require('../../../src/util')
 // This includes all tests for putItemHandler
 describe('Test putSubmissionHandler', () => {
     let putSpy;
-
+    let getSpy;
     // One-time setup and teardown, see more in https://jestjs.io/docs/en/setup-teardown
     beforeAll(() => {
         // Mock DynamoDB put method
         // https://jestjs.io/docs/en/jest-object.html#jestspyonobject-methodname
         putSpy = jest.spyOn(dynamodb.DocumentClient.prototype, 'put');
+        getSpy = jest.spyOn(dynamodb.DocumentClient.prototype, 'get');
     });
 
     // Clean up mocks
@@ -23,10 +24,15 @@ describe('Test putSubmissionHandler', () => {
 
     //Mock data
     const {objSuccess, objUpdate, objfail} = require('../../../MockData/submission')
+    const assignmentObject = require('../../../MockData/assignment')
 
     // This test invokes putAssignmentHandler and compares the result
     it('should add item', async () => {
         // Return the specified value whenever the spied put function is called
+        getSpy.mockReturnValue({
+            promise: () => Promise.resolve(assignmentObject.objSuccess),
+        });
+
         putSpy.mockReturnValue({
             promise: () => Promise.resolve(reponseFormat(statusCode.statusCode, objSuccess)),
         });
@@ -49,6 +55,10 @@ describe('Test putSubmissionHandler', () => {
 
     it('should edit item', async () => {
         // Return the specified value whenever the spied put function is called
+        getSpy.mockReturnValue({
+            promise: () => Promise.resolve(assignmentObject.submissionTest),
+        });
+
         putSpy.mockReturnValue({
             promise: () => Promise.resolve(reponseFormat(statusCode.statusCode, objUpdate)),
         });
