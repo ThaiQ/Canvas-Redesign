@@ -15,10 +15,10 @@ exports.putCourseHandler = async (event, context, callback) => {
     // Get id and name from the body of the request
     const {
     CourseName,
-    CourseID,
     Description,
     Syllabus,
     Session,
+    CourseID,
    
     } = typeof body === 'string' ? JSON.parse(body) : body;
 

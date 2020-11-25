@@ -38,7 +38,7 @@ describe('Test deleteCourseHandler', () => {
 
         // Invoke putItemHandler()
         const result = await lambda.deleteCourseHandler(event,"",()=>{});
-        const expectedResult = reponseFormat(statusCode.Success, {ID: objSuccess.ID})
+        const expectedResult = reponseFormat(statusCode.Success, {CourseID: objSuccess.CourseID})
 
         // Compare the result with the expected result
         expect(result).toEqual(expectedResult);

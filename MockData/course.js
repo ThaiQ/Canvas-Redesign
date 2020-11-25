@@ -1,26 +1,24 @@
 const objSuccess =
 {
     CourseName: "CMPE-133",
-    CourseID: 234435334,
     Description: "Welcome to CMPE133",
     Syllabus:" ",
     Session: 1,
-    ID: "courseid"
+    CourseID: "courseid"
 }
 
 const objUpdate =
 {
     CourseName: "CMPE-133",
-    CourseID: 234435334,
     Description: "Welcome to CMPE133",
     Syllabus:" ",
     Session: 1,
-    ID: "courseid"
+    CourseID: "courseid"
 }
 
 const objfail =
 {
-   
+    CourseName:" ",
     Description: "Welcome to CMPE133",
     Syllabus:" ",
     Session: 1,

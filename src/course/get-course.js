@@ -11,7 +11,7 @@ exports.getCourseHandler = async (event, context, callback) => {
     const { body, httpMethod, path } = event;
     // Get id and name from the body of the request
     const {
-        ID
+        CourseID 
         } = typeof body === 'string' ? JSON.parse(body) : body;
     
 
@@ -24,8 +24,8 @@ exports.getCourseHandler = async (event, context, callback) => {
     let req = null
     // Creates a new item, or replaces an old item with a new item
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-    if (ID) {
-        req = inputFormat(tableName, null, {ID})
+    if (CourseID) {
+        req = inputFormat(tableName, null, {CourseID})
         // Get 1 item from the table
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#get-property
         return await db.get(req).promise()
