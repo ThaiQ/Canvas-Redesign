@@ -19,7 +19,7 @@ exports.putCourseHandler = async (event, context, callback) => {
     Syllabus,
     Session,
     CourseID,
-   
+    InstructorID 
     } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
