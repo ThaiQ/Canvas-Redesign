@@ -19,15 +19,16 @@ exports.putCourseHandler = async (event, context, callback) => {
     Syllabus,
     Session,
     CourseID,
-   
+    InstructorID,
+    Date,
     } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
     if (httpMethod !== 'POST') {
         return errFormat(statusCode.MethodNotAllow, `postMethod only accepts POST method, you tried: ${httpMethod} method.`, callback)
     }
-    else if (!CourseID || !CourseName) {
-        return errFormat(statusCode.BadRequest, `Missing CourseID or CourseName.`, callback)
+    else if (!CourseName || !InstructorID) {
+        return errFormat(statusCode.BadRequest, `Missing CourseName or InstructorID.`, callback)
     }
 
     if (!response) {
@@ -38,7 +39,7 @@ exports.putCourseHandler = async (event, context, callback) => {
             Syllabus,
             Session,
             CourseID : CourseID ? CourseID : 
-            crypto.createHash('sha1').update(CourseID).digest('hex')
+            crypto.createHash('sha1').update(InstructorID+Session+CourseName+Date).digest('hex')
         }
 
         // Creates a new item, or replaces an old item with a new item
