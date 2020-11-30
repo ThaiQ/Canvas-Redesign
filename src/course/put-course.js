@@ -39,7 +39,8 @@ exports.putCourseHandler = async (event, context, callback) => {
             Syllabus,
             Session,
             CourseID : CourseID ? CourseID : 
-            crypto.createHash('sha1').update(InstructorID+Session+CourseName+Date).digest('hex')
+            crypto.createHash('sha1').update(InstructorID+Session+CourseName+Date).digest('hex'),
+            InstructorID
         }
 
         // Creates a new item, or replaces an old item with a new item
