@@ -20,7 +20,8 @@ exports.putUserHandler = async (event, context, callback) => {
         ContactInformation,
         AccessLevel,
         ProfilePictureURL,
-        StudentID
+        StudentID,
+        Courses
         } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
@@ -33,13 +34,16 @@ exports.putUserHandler = async (event, context, callback) => {
 
     if (!response){
         //combine them into an object
-        const req = {Bio,
+        const req = {
+            Bio,
             DateBirth,
             AccountEmail,
             ContactInformation,
             AccessLevel,
             ProfilePictureURL,
-            StudentID}
+            StudentID,
+            Courses
+        }
         
         // Creates a new item, or replaces an old item with a new item
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property

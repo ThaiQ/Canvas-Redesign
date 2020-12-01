@@ -226,25 +226,116 @@ Resources:
             Path: /deleteCourse
             Method: POST
 
-  # # These Lambda functions config associated with the source code: src/users
-  # putAssignment:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     Handler: src/assignments/put-assignment.putAssignmentHandler
-  #     Policies:
-  #       # Give Create/Read/Update/Delete Permissions to the SampleTable
-  #       - DynamoDBCrudPolicy:
-  #           TableName: !Ref AssignmentTable
-  #     Environment:
-  #       Variables:
-  #         # Make table name accessible as environment variable from function code during execution
-  #         TABLE: !Ref AssignmentTable
-  #     Events:
-  #       Api:
-  #         Type: Api
-  #         Properties:
-  #           Path: /assignments
-  #           Method: POST
+  # These Lambda functions config associated with the source code: src/assignments
+  deleteAssignment:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/delete-assignment.deleteAssignmentHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /deleteAssignment
+            Method: POST
+  deleteQuestion:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/delete-question.deleteQuestionHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /deleteQuestion
+            Method: POST
+  putAssignment:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/put-assignment.putAssignmentHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /putAssignment
+            Method: POST
+  putGrade:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/put-grade.putGradeHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /putGrade
+            Method: POST
+  putQuestion:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/put-question.putQuestionHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /putQuestion
+            Method: POST
+  putSubmission:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/put-submission.putSubmissionHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /putSubmission
+            Method: POST
+
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
 
@@ -291,18 +382,18 @@ Resources:
         WriteCapacityUnits: "3"
       TableName: "CourseTable"
   
-  # AssignmentTable: 
-  #   Type: AWS::DynamoDB::Table
-  #   Properties: 
-  #     AttributeDefinitions:
-  #       - 
-  #         AttributeName: "AssignmentID"
-  #         AttributeType: "S"
-  #     KeySchema: 
-  #       - 
-  #         AttributeName: "AssignmentID"
-  #         KeyType: "HASH"
-  #     ProvisionedThroughput: 
-  #       ReadCapacityUnits: "3"
-  #       WriteCapacityUnits: "3"
-  #     TableName: "AssignmentTable"    
+  AssignmentTable: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions:
+        - 
+          AttributeName: "AssignmentID"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "AssignmentID"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "3"
+        WriteCapacityUnits: "3"
+      TableName: "AssignmentTable"    
