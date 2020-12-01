@@ -13,8 +13,8 @@
     },
     "scripts": {
         "test": "jest",
-        "start": "npm start --prefix Frontend",
-        "install-frontend": "npm install --prefix Frontend",
+        "start": "npm run start --prefix Frontend",
+        "install-frontend": "npm install --prefix api",
         "deploy": "npm run deploy --prefix Frontend"
     }
 }

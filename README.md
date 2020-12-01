@@ -1,4 +1,28 @@
-# Website & Mobile Starter Project
+# Getting Started
+
+## Running Unit tests
+
+Requirements:
+
+* Node.js - [Install Node.js 10](https://nodejs.org/en/), including the npm package management tool.
+* Tests are defined in the \_\_tests__ folder in this project. Use `npm` to install the [Jest test framework](https://jestjs.io/) and run unit tests.
+
+```bash
+npm install
+npm run test
+```
+
+<br>
+
+## Running the Frontend
+```bash
+npm run install-frontend
+npm run start
+```
+
+<br><br><br>
+
+# AWS Serverless Application
 
 This project contains source code and supporting files for the serverless application that you created in the AWS Lambda console. You can update your application at any time by committing and pushing changes to your AWS CodeCommit or GitHub repository.
 
@@ -169,25 +193,6 @@ The AWS SAM CLI reads the application template to determine the API's routes and
           Properties:
             Path: /
             Method: GET
-```
-
-## Unit tests
-
-Requirements:
-
-* Node.js - [Install Node.js 10](https://nodejs.org/en/), including the npm package management tool.
-
-Tests are defined in the \_\_tests__ folder in this project. Use `npm` to install the [Jest test framework](https://jestjs.io/) and run unit tests.
-
-```bash
-npm install
-npm run test
-```
-
-## Frontend
-```bash
-npm run install-frontend
-npm start
 ```
 
 ## Resources
