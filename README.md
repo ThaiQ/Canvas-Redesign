@@ -16,8 +16,9 @@ npm run test
 
 ## Running the Frontend
 ```bash
-npm run install-frontend
-npm run start
+cd Frontend
+npm install
+npm start
 ```
 
 <br><br><br>
