@@ -30,6 +30,7 @@ function App() {
         </a>
         {user? <Logout reload={true}/> : <Login reload={true}/>}
         {user? <Link to='/profile'>Profile</Link>:''}
+        {user? <Link to='/assignments'>Create Assignment</Link>:''}
       </header>
     </div>
   );

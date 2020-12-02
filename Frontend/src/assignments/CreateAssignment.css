@@ -1,0 +1,71 @@
+.App {
+    text-align: center;
+    float: center;
+  }
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  .bg {
+    background-color: #282c34;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  #title {
+      font-size: 60px;
+  }
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: #8d8f8e;
+  }
+  .App-link {
+    color: #61dafb;
+  }
+  ::placeholder {
+    color: white !important;
+  }
+  #assignmentName:focus, #assignmentDesc:focus, #numPoints:focus, #dueDate:focus, #category:focus {
+    background-color: #8d8f8e !important;
+  }
+  #assignmentName::placeholder, #numPoints::placeholder{
+      color: #dfd9d9 !important;
+  } 
+  #submit {
+      position: relative;
+  }
+  option { 
+    /* Whatever color  you want */
+    background-color: #51535a;
+    }
+  .formElement {
+    box-sizing: border-box;
+    color: #dfd9d9 !important;
+    background-color: #51535a;
+  }
+  .dropdown:hover .dropbtn {
+    background-color: #51535a;
+  }
+  #submit {
+    margin: 5px;
+    width: 25%;
+    padding: 7px;
+    transform: translate(-12px);
+  }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
