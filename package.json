@@ -4,9 +4,17 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "@emotion/react": "^11.1.1",
+        "@emotion/style": "^0.8.0",
+        "@emotion/styled": "^11.0.0",
+        "@material-ui/core": "^4.11.1",
+        "@material-ui/icons": "^4.9.1",
+        "@material-ui/lab": "^4.0.0-alpha.56",
         "aws-sdk": "^2.437.0",
         "axios": "^0.21.0",
-        "crypto": "^1.0.1"
+        "crypto": "^1.0.1",
+        "material-table": "^1.69.2",
+        "react-avatar": "^3.9.7"
     },
     "devDependencies": {
         "jest": "^24.7.1"

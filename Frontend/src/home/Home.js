@@ -28,8 +28,10 @@ function App() {
         >
           Learn React
         </a>
-        {user? <Logout reload={true}/> : <Login reload={true}/>}
-        {user? <Link to='/profile'>Profile</Link>:''}
+        {user? <Logout reload={true}/> : <Login reload={true}/>} 
+        {user ? <Link to='/profile'>Profile</Link> : ''}
+        <Link to='/course'>StarCourse</Link>
+        
       </header>
     </div>
   );

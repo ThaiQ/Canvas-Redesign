@@ -15,5 +15,6 @@ export default function Profile(props) {
 
     return (
     <div> Hi: {user?user.givenName:''} </div>
+    
     );
 }

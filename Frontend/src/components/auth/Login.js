@@ -9,7 +9,7 @@ export default function LoginHooks(props) {
     console.log('Login Success: currentUser:', res.profileObj);
     localStorage.setItem('user', JSON.stringify(res.profileObj));
     refreshTokenSetup(res);
-    //checkLogin(res)
+    checkLogin(res)
     if (props.reload === true) window.location.reload(false)
   };
 
