@@ -16,14 +16,22 @@ var statusCode = {
  * @param {func} callback - web call back funtion
  */
 function reponseFormat(statusCode, body, callback){
-    let obj = {
-        statusCode: statusCode,
-        body: JSON.stringify(body),
-        headers: {
-            "Access-Control-Allow-Headers" : "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        },
+    let obj = null
+    if (process.env.NODE_ENV === "test"){
+        obj = {
+            statusCode: statusCode,
+            body: JSON.stringify(body),
+        }
+    }else {
+        obj = {
+            statusCode: statusCode,
+            body: JSON.stringify(body),
+            headers: {
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            }
+        }
     }
     if (callback) process.env.NODE_ENV !== 'test' && callback(null, obj)
     return obj
