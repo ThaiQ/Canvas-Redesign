@@ -1,6 +1,7 @@
 import React from 'react';
 import { useGoogleLogin } from 'react-google-login';
 import { checkLogin,clientId } from '../../util/auth'
+import { Button } from '@material-ui/core'
 const {refreshTokenSetup} = require('../../util/refreshToken')
 
 export default function LoginHooks(props) {
@@ -27,8 +28,8 @@ export default function LoginHooks(props) {
   });
 
   return (
-    <button onClick={signIn} className="button">
+    <Button onClick={signIn} variant="contained" color="primary">
       Sign in with Google
-    </button>
+    </Button>
   );
 }
