@@ -18,7 +18,12 @@ var statusCode = {
 function reponseFormat(statusCode, body, callback){
     let obj = {
         statusCode: statusCode,
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
+        headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
     }
     if (callback) process.env.NODE_ENV !== 'test' && callback(null, obj)
     return obj
