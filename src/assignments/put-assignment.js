@@ -14,6 +14,7 @@ exports.putAssignmentHandler = async (event, context, callback) => {
     let response = null;
     // Get id and name from the body of the request
     const {
+            Name,
             Description,
             Points,
             DueDate,
@@ -36,6 +37,7 @@ exports.putAssignmentHandler = async (event, context, callback) => {
         //combine them into an object
         const req = 
         {
+            Name,
             Description,
             Points,
             DueDate,
