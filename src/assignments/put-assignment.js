@@ -29,8 +29,11 @@ exports.putAssignmentHandler = async (event, context, callback) => {
     if (httpMethod !== 'POST') {
         return errFormat(statusCode.MethodNotAllow,`postMethod only accepts POST method, you tried: ${httpMethod} method.`,callback)
     }
-    else if (!AssignmentID) {
-        return errFormat(statusCode.BadRequest,`Missing AssignmentID.`,callback)
+    else if (!Name) {
+        return errFormat(statusCode.BadRequest,`Missing Name.`,callback)
+    }
+    else if (!Category) {
+        return errFormat(statusCode.BadRequest,`Missing Category.`,callback)
     }
 
     if (!response){

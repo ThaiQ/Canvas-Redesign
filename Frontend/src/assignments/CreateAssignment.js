@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { checkLogin }  from '../util/auth'
 import './CreateAssignment.css';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import { Button, FormGroup, Label, Input} from 'reactstrap';
+const axios = require("axios")
 
 export default function CreateAssignment() {
     const [user, setUser] = useState(null);
@@ -18,11 +18,13 @@ export default function CreateAssignment() {
     const [dueDate, setDueDate] = useState ('')
     const [category, setCategory] = useState ('')
 
-    function click() {
-        const formSubmission = JSON.stringify({assignmentName, assignmentDesc, numPoints, dueDate, category});
-        //Store in database
-        //Redirect
-    }
+    async function click() {
+        const body = JSON.stringify({assignmentName, assignmentDesc, numPoints, dueDate, category});
+        console.log(user)
+        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
+        console.log(res.data)
+      }
+    
     return (
         <html className="bg">
             <div className="App"> 
