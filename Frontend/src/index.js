@@ -6,16 +6,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './home/Home';
 import Profile from './profile/Profile';
+import AssignmentsHub from './assignments/AssignmentsHub'
 import CreateAssignment from './assignments/CreateAssignment'
+import ViewAssignments from './assignments/ViewAssignments';
 
 
 // Add new routing path to new pages in here
 let routes = [
   {
     path : "/profile",
-    component: Profile,
+    component: Profile
+    },
+    {
     path : "/assignments",
-    component: CreateAssignment
+    component: AssignmentsHub,
+    },
+    {
+    path : "/createassignment",
+    component: CreateAssignment,
+    },
+    {
+    path : "/viewassignments",
+    component: ViewAssignments
   }
 ]
 

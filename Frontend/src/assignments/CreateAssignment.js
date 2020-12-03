@@ -17,14 +17,14 @@ export default function CreateAssignment() {
     const [Points, setNumPoints] = useState ('')
     const [DueDate, setDueDate] = useState ('')
     const [Category, setCategory] = useState ('')
-
+    
     async function click() {
         const body = JSON.stringify({Name, Description, Points, DueDate, Category, Closed: 1});
         console.log(user)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
       }
-    
+
     return (
         <html className="bg">
             <div className="App"> 
