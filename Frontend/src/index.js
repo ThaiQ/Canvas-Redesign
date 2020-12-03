@@ -10,6 +10,10 @@ import AssignmentsHub from './assignments/AssignmentsHub'
 import CreateAssignment from './assignments/CreateAssignment'
 import ViewAssignments from './assignments/ViewAssignments';
 
+import StarCourse from './course/StartCourse';
+import CourseHome from './course/CourseHome';
+import People from './course/People';
+import CourseExample from './course/example'
 
 // Add new routing path to new pages in here
 let routes = [
@@ -28,6 +32,22 @@ let routes = [
     {
     path : "/viewassignments",
     component: ViewAssignments
+  },
+  {
+    path: "/course",
+    component: StarCourse
+  },
+  {
+    path: "/course/CourseHome",
+    component: CourseHome
+  },
+  {
+    path: "/course/People",
+    component: People
+  },
+  {
+    path: "/course/example",
+    component: CourseExample
   }
 ]
 
