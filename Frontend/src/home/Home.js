@@ -84,12 +84,12 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <h1>RE : CANVAS</h1>
+        <h1 id='home-title'>RE : CANVAS</h1>
 
         {user ? <Logout reload={true} /> : <Login reload={true} />}
       </header>
 
-      <Modal isOpen={create}>
+      <Modal id='home-modal' isOpen={create}>
         <ModalHeader toggle={handleModal} className='home-modal-title'>First Timer!</ModalHeader>
         <ModalBody className={""+create?"home-modal-body":''}>
         <Input type="email" name="email" id="exampleEmail" placeholder="School ID" onChange={handleID}/>

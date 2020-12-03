@@ -9,7 +9,7 @@ export default function Profile(props) {
     useEffect(()=>{
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
         setUser(user)
-        checkLogin(user) //redirect user to homepage if not login
+        //checkLogin(user) //redirect user to homepage if not login
         console.log(user)
     },[])
 

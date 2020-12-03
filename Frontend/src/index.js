@@ -13,9 +13,7 @@ import CreateAssignment from './assignments/CreateAssignment'
 let routes = [
   {
     path : "/profile",
-    component: Profile,
-    path : "/assignments",
-    component: CreateAssignment
+    component: Profile
   }
 ]
 
