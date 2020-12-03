@@ -31,7 +31,7 @@
     color: #61dafb;
   }
   ::placeholder {
-    color: white !important;
+    color: white;
   }
   #assignmentName:focus, #assignmentDesc:focus, #numPoints:focus, #dueDate:focus, #category:focus {
     background-color: #8d8f8e !important;

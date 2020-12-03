@@ -92,6 +92,7 @@ function App() {
       <Modal id='home-modal' isOpen={create}>
         <ModalHeader toggle={handleModal} className='home-modal-title'>First Timer!</ModalHeader>
         <ModalBody className={""+create?"home-modal-body":''}>
+          <p id='home-modal-sub'>School-ID:</p>
         <Input type="email" name="email" id="exampleEmail" placeholder="School ID" onChange={handleID}/>
           <p id='home-modal-sub'>Are you a:</p>
         <FormGroup check>
