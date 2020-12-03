@@ -8,7 +8,7 @@ const objSuccess =
     Questions: [],
     AssignmentID: "asdf123",
     Submissions: [],
-    Closed: "0"
+    Closed: "1"
 }
 
 const objUpdate =

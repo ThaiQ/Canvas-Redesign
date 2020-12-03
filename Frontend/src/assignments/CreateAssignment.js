@@ -12,14 +12,14 @@ export default function CreateAssignment() {
         checkLogin(user) //redirect user to homepage if not login
         console.log(user)
     },[])
-    const [assignmentName, setAssignmentName] = useState ('')
-    const [assignmentDesc, setAssignmentDesc] = useState ('')
-    const [numPoints, setNumPoints] = useState ('')
-    const [dueDate, setDueDate] = useState ('')
-    const [category, setCategory] = useState ('')
+    const [Name, setAssignmentName] = useState ('')
+    const [Description, setAssignmentDesc] = useState ('')
+    const [Points, setNumPoints] = useState ('')
+    const [DueDate, setDueDate] = useState ('')
+    const [Category, setCategory] = useState ('')
 
     async function click() {
-        const body = JSON.stringify({assignmentName, assignmentDesc, numPoints, dueDate, category});
+        const body = JSON.stringify({Name, Description, Points, DueDate, Category, Closed: 1});
         console.log(user)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
