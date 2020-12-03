@@ -8,11 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import { StartCourse } from './StartCourse'
 
-import image from './img/green.jpg';
-import image1 from './img/sunflower.jpg';
-import image2 from './img/images.jpeg';
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -34,32 +29,32 @@ const useStyles = makeStyles((theme) => ({
 const tileData = [
   {
 
-    img: image,
+    img: "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
     title: 'Home Course',
 
   },
   {
-    img: image1,
+    img: "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
     title: 'Module',
 
   },
   {
-    img: image2,
+    img: "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
     title: 'Assignment',
 
   },
   {
-    img: image,
+    img: "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
     title: <a href="/course/People" style={{ color: "white" }} ><strong>People</strong></a>,
 
   },
   {
-    img: image2,
+    img: "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
     title: 'Grades',
 
   },
   {
-    img: image,
+    img: "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
     title: 'Announcement',
 
   },
