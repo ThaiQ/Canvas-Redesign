@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { checkLogin }  from '../util/auth'
+import Log from '../components/auth/Logout'
 
 export default function Profile(props) {
 
@@ -14,6 +15,8 @@ export default function Profile(props) {
 
 
     return (
-    <div> Hi: {user?user.givenName:''} </div>
+    <div> Hi: {user?user.Name:''} 
+        <Log rehome={true}/>
+    </div>
     );
 }

@@ -15,7 +15,7 @@ export default function LoginHooks(props) {
   };
 
   const onFailure = (res) => {
-    localStorage.setItem('user', '');
+    localStorage.removeItem('user');
     //checkLogin()
   };
 
