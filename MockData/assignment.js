@@ -1,6 +1,7 @@
 const objSuccess =
 {
-    Description: "Midterm 1",
+    Name: "Midterm 1",
+    Description: "Test of knowledge",
     Points: "100",
     DueDate: "11/10/2020",
     Category: "Quiz",
@@ -12,7 +13,8 @@ const objSuccess =
 
 const objUpdate =
 {
-    Description: "Midterm 1 Updated",
+    Name: "Midterm 1 Updated",
+    Description: "Test of knowledge",
     Points: "150",
     DueDate: "11/11/2020",
     Category: "Quiz",
