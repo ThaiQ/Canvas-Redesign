@@ -9,6 +9,7 @@ import Profile from './profile/Profile';
 import AssignmentsHub from './assignments/AssignmentsHub'
 import CreateAssignment from './assignments/CreateAssignment'
 import ViewAssignments from './assignments/ViewAssignments';
+import EditAssignment from './assignments/EditAssignment'
 
 
 // Add new routing path to new pages in here
@@ -28,7 +29,11 @@ let routes = [
     {
     path : "/viewassignments",
     component: ViewAssignments
-  }
+    },
+    {
+      path : "/editassignment/:assignmentid",
+      component: EditAssignment
+    }
 ]
 
 const routing = (
