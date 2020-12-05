@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { checkLogin }  from '../util/auth'
-import Logout from '../components/auth/Logout'
+import Navbar from '../components/left-navbar/drawer'
 
 export default function Profile(props) {
 
@@ -11,10 +11,15 @@ export default function Profile(props) {
         console.log(user)
     },[])
 
+    function ProfilePage(){
+        return <div>
+            <h1 style={{color:'white'}}> Hi {user?user.Name:''}! </h1>
+        </div>
+    } 
 
     return (
-    <div> Hi: {user?user.Name:''} 
-        <Logout rehome={true}/>
+    <div>
+        <Navbar title='Profile' content={ProfilePage}></Navbar>
     </div>
     );
 }

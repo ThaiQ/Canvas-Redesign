@@ -1,0 +1,71 @@
+#dashboard-home {
+    background-color: rgb(27, 38, 53) !important;
+}
+
+.dashboard-home .MuiPaper-root{
+    background-color: rgb(35, 48, 68) !important;
+}
+
+body {
+    background-color: rgb(27, 38, 53) !important;
+}
+
+.dashb-text{
+    color: rgb(238, 238, 238) !important;
+}
+
+.dashb-text .MuiSvgIcon-root {
+    color: rgb(238, 238, 238) !important;
+}
+
+.dashboard-home .MuiListItem-root:hover {
+    background-color:rgb(60, 78, 104) !important;
+    text-decoration: none;
+}
+
+#dashb-draw-title {
+    color: rgb(238, 238, 238);
+    margin: auto;
+    margin-top: 2vh;
+    text-align: center;
+}
+
+#dashb-sub{
+    color: white;
+}
+
+#dash-table .MuiTableCell-body, #dash-table .MuiTableCell-head {
+    color: white;
+}
+
+.dash-class-cell:hover{
+    background-color: rgb(60, 78, 104);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#dash-todo:hover{
+    background-color: rgb(136, 143, 143);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#dashb-general .justify-content-between{
+    background-color:rgb(35, 48, 68);
+    color: white;
+}
+
+#dashb-general .justify-content-between:hover{
+    background-color:rgb(60, 78, 104);
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.dash-general-ani:hover{
+    text-decoration: none;
+}
+
+.drawer-link {
+    text-decoration: none !important;
+}
