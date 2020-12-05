@@ -185,12 +185,19 @@ function People() {
 
 
   return (
+<<<<<<< HEAD
 
     <List>
       
       <Grid container spacing={1} >
         <Grid item xs={3} ></Grid>
         <Grid item xs={6} >
+=======
+    <List>
+      <Grid container spacing={1}>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={6}>
+>>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
           <div>
             {iserror &&
               <Alert severity="error">
@@ -201,7 +208,10 @@ function People() {
             }
           </div>
           <MaterialTable
+<<<<<<< HEAD
            style ={{borderColor:"lightblue", borderStyle: 'solid'}}
+=======
+>>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
             title=""
             columns={columns}
             data={data}
@@ -225,8 +235,12 @@ function People() {
         </Grid>
         <Grid item xs={3}></Grid>
       </Grid>
+<<<<<<< HEAD
       </List>
      
+=======
+    </List>
+>>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
   );
 }
 
@@ -234,9 +248,17 @@ export default People;
 
 const List = styled.div`
    
+<<<<<<< HEAD
     margin: 250px ;
     width: 2000px; 
     height: 100%;
     position: absolute; 
     left: -500px;
+=======
+    margin: 300px ;
+    width: 1500px; 
+    height: 100%;
+    position: absolute; 
+    left: -400px;
+>>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
     `;
