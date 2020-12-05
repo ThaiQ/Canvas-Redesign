@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin } from '../util/auth'
 import { Table, Input, Button } from 'reactstrap';
 import './example.css'
+import Navbar from '../components/left-navbar/drawer'
 
 const axios = require('axios')
 
@@ -59,21 +60,22 @@ export default function Example(props) {
         await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/deleteCourse", JSON.stringify(objectToDelete))
         //reupdate current board
         getDatabase()
-    } 
+    }
 
     //HTML
-    return (
-        <div>
-            <div className='example-input'>
+
+    function Page() {
+        return <div>
+            <div className='example-input' style={{ color: 'white' }}>
                 Add a Course
-                <Input type="email" placeholder="Course Name" onChange={(event) => { setCourseName(event.target.value) }} />
+        <Input type="email" placeholder="Course Name" onChange={(event) => { setCourseName(event.target.value) }} />
                 <Input type="email" placeholder="Session" onChange={(event) => { setSession(event.target.value) }} />
                 <Input type="email" placeholder="Description" onChange={(event) => { setDescription(event.target.value) }} />
                 <Button onClick={submit}> Submit </Button>
             </div>
 
             <Table>
-                <thead>
+                <thead style={{ color: 'white' }}>
                     <tr>
                         <th>#</th>
                         <th>CourseID</th>
@@ -84,22 +86,26 @@ export default function Example(props) {
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ color: 'white' }}>
                     {
                         data ? data.map((course, index) => {
                             return <tr key={index}>
-                                <th scope="row">{index+1}</th>
+                                <th scope="row">{index + 1}</th>
                                 <td>{course.CourseID}</td>
                                 <td>{course.CourseName}</td>
                                 <td>{course.Session}</td>
                                 <td>{course.InstructorID}</td>
                                 <td>{course.Description}</td>
-                                <th id='example-delete-text' onClick={()=>{deleteItem(course.CourseID)}}> Delete </th>
+                                <th id='example-delete-text' onClick={() => { deleteItem(course.CourseID) }}> Delete </th>
                             </tr>
                         }) : ''
                     }
                 </tbody>
             </Table>
         </div>
+    }
+
+    return (
+        <Navbar Title='Sample Course' content={Page}/>
     );
 }
