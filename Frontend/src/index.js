@@ -11,40 +11,45 @@ import CreateAssignment from './assignments/CreateAssignment'
 import ViewAssignments from './assignments/ViewAssignments';
 import EditAssignment from './assignments/EditAssignment'
 
+import Dashboard from './dashboard/dashboard'
 
 // Add new routing path to new pages in here
 let routes = [
   {
-    path : "/profile",
+    path: "/profile",
     component: Profile
-    },
-    {
-    path : "/assignments",
+  },
+  {
+    path: "/assignments",
     component: AssignmentsHub,
-    },
-    {
-    path : "/createassignment",
+  },
+  {
+    path: "/createassignment",
     component: CreateAssignment,
-    },
-    {
-    path : "/viewassignments",
+  },
+  {
+    path: "/viewassignments",
     component: ViewAssignments
-    },
-    {
+  },
+  {
       path : "/editassignment/:assignmentid",
       component: EditAssignment
-    }
+  },
+  {
+    path: "/dashboard",
+    component: Dashboard
+  }
 ]
 
 const routing = (
   <Router>
     <Switch>
       {
-        routes.map((route,ind)=>{
-          return <Route key={ind} exact path={route.path} component={route.component}/>
+        routes.map((route, ind) => {
+          return <Route key={ind} exact path={route.path} component={route.component} />
         })
       }
-      <Route exact component={Home}/>
+      <Route exact component={Home} />
     </Switch>
   </Router>
 )

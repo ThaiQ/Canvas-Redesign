@@ -23,7 +23,9 @@
 }
 
 #home-modal-sub {
-  margin: 10px;
+  margin: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #home-title{

@@ -26,7 +26,7 @@ function App() {
 
   async function findUser() {
 
-    if (user.Name != null) window.location.href='/profile'
+    if (user.Name != null) window.location.href='/dashboard'
 
     let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getUser", JSON.stringify({}))
     let found = await res.data.Items.filter(elem => elem.AccountEmail === (user.email?user.email:user.AccountEmail))
@@ -41,7 +41,7 @@ function App() {
         LastName: user.familyName,
       }
       localStorage.setItem('user', JSON.stringify(updateUser));
-      window.location.href='/profile'
+      window.location.href='/dashboard'
     }
   }
 
@@ -73,7 +73,7 @@ function App() {
         Name: user.name
       }
       localStorage.setItem('user', JSON.stringify(updateUser));
-      window.location.href='/profile'
+      window.location.href='/dashboard'
     }
     else {
       alert("Fill in your School-ID and Role")
@@ -92,6 +92,7 @@ function App() {
       <Modal id='home-modal' isOpen={create}>
         <ModalHeader toggle={handleModal} className='home-modal-title'>First Timer!</ModalHeader>
         <ModalBody className={""+create?"home-modal-body":''}>
+          <p id='home-modal-sub'>School-ID:</p>
         <Input type="email" name="email" id="exampleEmail" placeholder="School ID" onChange={handleID}/>
           <p id='home-modal-sub'>Are you a:</p>
         <FormGroup check>
