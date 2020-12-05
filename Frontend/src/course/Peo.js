@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { forwardRef } from 'react';
 import Avatar from 'react-avatar';
 import Grid from '@material-ui/core/Grid'
+import { Table, Input, Button } from 'reactstrap';
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -47,7 +48,7 @@ const tableIcons = {
 };
 
 const api = axios.create({
-  baseURL: `https://reqres.in/api`
+  baseURL: `https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/`
 })
 
 
@@ -60,21 +61,21 @@ function validateEmail(email) {
 function People() {
 
   var columns = [
-    { title: "id", field: "id", hidden: true },
+    { title: "Id", field: "id", hidden: true },
     { title: "", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.first_name} /> },
     { title: "Name", field: "name" },
     { title: "email", field: "email" },
     { title: "Role", field: "role" }
   ]
-  const [data, setData] = useState([]); //table data
+  //const [data, setData] = useState([]); //table data
 
   //for error handling
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
   useEffect(() => {
-    //   api.get("/users")
-    api.get("")
+       api.get("/getUser")
+   // api.get("")
       .then(res => {
         setData(res.data.data)
       })
@@ -100,7 +101,7 @@ function People() {
     }
 
     if (errorList.length < 1) {
-      api.patch("/users/" + newData.id, newData)
+      api.patch("/getUser" + newData.id, newData)
         .then(res => {
           const dataUpdate = [...data];
           const index = oldData.tableData.id;
@@ -143,7 +144,7 @@ function People() {
 
 
     if (errorList.length < 1) { //no error
-      api.post("/users", newData)
+      api.post("/getUser", newData)
         .then(res => {
           let dataToAdd = [...data];
           dataToAdd.push(newData);
@@ -166,22 +167,44 @@ function People() {
 
   }
 
-  const handleRowDelete = (oldData, resolve) => {
+    const handleRowDelete = (oldData, resolve) => {
 
-    api.delete("/users/" + oldData.id)
-      .then(res => {
-        const dataDelete = [...data];
-        const index = oldData.tableData.id;
-        dataDelete.splice(index, 1);
-        setData([...dataDelete]);
-        resolve()
-      })
-      .catch(error => {
-        setErrorMessages(["Delete failed! Server error"])
-        setIserror(true)
-        resolve()
-      })
-  }
+        api.delete("/getUser" + oldData.id)
+            .then(res => {
+                const dataDelete = [...data];
+                const index = oldData.tableData.id;
+                dataDelete.splice(index, 1);
+                setData([...dataDelete]);
+                resolve()
+            })
+            .catch(error => {
+                setErrorMessages(["Delete failed! Server error"])
+                setIserror(true)
+                resolve()
+            })
+    };
+    const axios = require('axios')
+    const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
+
+    //Making sure that user is login
+    useEffect(() => {
+      //  checkLogin(user) //redirect user to homepage if not login
+        console.log(user)
+        getDatabase()
+    }, [])
+    const [courseName, setCourseName] = useState("")
+    const [session, setSession] = useState("")
+    const [description, setDescription] = useState("")
+    const [id, setID] = useState(user.StudentID)
+      //Get all data in the database (on aws)
+      const [data, setData] = useState([])
+      async function getDatabase() {
+          let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getUser", JSON.stringify({}))
+          //save to variable above
+          setData(res.data.Items)
+      }
+      
+    
 
 
   return (
@@ -201,27 +224,60 @@ function People() {
             }
           </div>
           <MaterialTable
-           style ={{borderColor:"lightblue", borderStyle: 'solid'}}
-            title=""
-            columns={columns}
-            data={data}
-            icons={tableIcons}
-            editable={{
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                  handleRowUpdate(newData, oldData, resolve);
+           
+            // title=""
+            // columns={columns}
+            // data={data}
+            // icons={tableIcons}
+            // editable={{
+            //   onRowUpdate: (newData, oldData) =>
+            //     new Promise((resolve) => {
+            //       handleRowUpdate(newData, oldData, resolve);
 
-                }),
-              onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                  handleRowAdd(newData, resolve)
-                }),
-              onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                  handleRowDelete(oldData, resolve)
-                }),
-            }}
-          />
+            //     }),
+            //   onRowAdd: (newData) =>
+            //     new Promise((resolve) => {
+            //       handleRowAdd(newData, resolve)
+            //     }),
+            //   onRowDelete: (oldData) =>
+            //     new Promise((resolve) => {
+            //       handleRowDelete(oldData, resolve)
+            //     }),
+            // }}
+                                 
+         
+           
+                  />
+                  
+                  <Table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>email</th>
+                    
+                    <th>Delete</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    data ? data.map((course, index) => {
+                        return <tr key={index}>
+                            <th scope="row">{index+1}</th>
+                            <td>{course.StudentID}</td>
+                            <td>{user?user.Name:''}</td>
+                            <td>{course.AccountEmail}</td>
+                            
+                            {/* <th id='example-delete-text' onClick={() => { deleteItem(course.CourseID) }}> Delete </th> */}
+                            
+                        </tr>
+                    }) : ''
+                }
+            </tbody>
+    
+        </Table>
         </Grid>
         <Grid item xs={3}></Grid>
       </Grid>

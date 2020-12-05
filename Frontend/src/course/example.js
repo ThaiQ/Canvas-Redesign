@@ -3,6 +3,8 @@ import { checkLogin } from '../util/auth'
 import { Table, Input, Button } from 'reactstrap';
 import './example.css'
 
+
+
 const axios = require('axios')
 
 export default function Example(props) {
@@ -26,16 +28,19 @@ export default function Example(props) {
     const [id, setID] = useState(user.StudentID)
     //Submitting button
     async function submit() {
-        let objectToSave = {
-            CourseName: courseName,
-            Description: description,
-            Session: session,
-            InstructorID: id
-        }
-        //save data to databse (on aws)
-        await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putCourse", JSON.stringify(objectToSave))
-        //reupdate current board
-        getDatabase()
+       
+            let objectToSave = {
+                CourseName: courseName,
+                Description: description,
+                Session: session,
+                InstructorID: id
+            }
+            //save data to databse (on aws)
+            await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putCourse", JSON.stringify(objectToSave))
+            //reupdate current board
+            getDatabase()
+            window.location.href = '/course/CourseHome'
+    
     }
 
 
@@ -61,12 +66,14 @@ export default function Example(props) {
         getDatabase()
     } 
 
+   
+
     //HTML
     return (
         <div>
             <div className='example-input'>
                 Add a Course
-                <Input type="email" placeholder="Course Name" onChange={(event) => { setCourseName(event.target.value) }} />
+                <Input type="email" required placeholder="Course Name" onChange={(event) => { setCourseName(event.target.value) }} />
                 <Input type="email" placeholder="Session" onChange={(event) => { setSession(event.target.value) }} />
                 <Input type="email" placeholder="Description" onChange={(event) => { setDescription(event.target.value) }} />
                 <Button onClick={submit}> Submit </Button>
@@ -82,6 +89,7 @@ export default function Example(props) {
                         <th>InstructorID</th>
                         <th>Description</th>
                         <th>Delete</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -94,11 +102,13 @@ export default function Example(props) {
                                 <td>{course.Session}</td>
                                 <td>{course.InstructorID}</td>
                                 <td>{course.Description}</td>
-                                <th id='example-delete-text' onClick={()=>{deleteItem(course.CourseID)}}> Delete </th>
+                                <th id='example-delete-text' onClick={() => { deleteItem(course.CourseID) }}> Delete </th>
+                                
                             </tr>
                         }) : ''
                     }
                 </tbody>
+        
             </Table>
         </div>
     );

@@ -14,6 +14,7 @@ import StarCourse from './course/StartCourse';
 import CourseHome from './course/CourseHome';
 import People from './course/People';
 import CourseExample from './course/example'
+import Peo from './course/Peo';
 
 // Add new routing path to new pages in here
 let routes = [
@@ -48,6 +49,10 @@ let routes = [
   {
     path: "/course/example",
     component: CourseExample
+  },
+  {
+    path: "/course/Peo",
+    component: Peo
   }
 ]
 

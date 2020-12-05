@@ -11,7 +11,6 @@ export default function Profile(props) {
         console.log(user)
     },[])
 
-
     return (
     <div> Hi: {user?user.Name:''} 
         <Logout rehome={true}/>
