@@ -21,25 +21,25 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import Alert from '@material-ui/lab/Alert';
 import Navbar from '../../components/left-navbar/drawer'
 
-export default function MaterialTableDemo() {
+export default function People() {
       
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} style={{ color:'white'}}  />),
         Check: forwardRef((props, ref) => <Check {...props} ref={ref} style={{ color:'white'}}/>),
-        Clear: forwardRef((props, ref) => <Clear {...props} ref={ref}  />),
-        Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-        DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}  />),
-        Edit: forwardRef((props, ref) => <Edit {...props} ref={ref}  />),
-        Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+        Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} style={{ color:'white'}} />),
+        Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref}style={{ color:'white'}} />),
+        DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} style={{ color:'white'}} />),
+        Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} style={{ color: 'white' }} />),
+        Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} style={{ color:'white'}}/>),
         Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} style={{ color:'white'}} />),
-        FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-        LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref}  />),
-        NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}  />),
-        PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref}  />),
+        FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} style={{ color:'white'}}/>),
+        LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} style={{ color:'white'}} />),
+        NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} style={{ color:'white'}} />),
+        PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} style={{ color:'white'}} />),
         ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} style={{ color:'white'}}/>),
         Search: forwardRef((props, ref) => <Search {...props} ref={ref} style={{ color:'white'}} />),
-        SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref}  />),
-        ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+        SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} style={{ color:'blue'}} />),
+        ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} style={{ color:'white'}} />),
         ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
       
     };
@@ -52,16 +52,17 @@ export default function MaterialTableDemo() {
   const [state, setState] = React.useState({
       columns: [
         {
-        title: "", render: rowData => <Avatar maxInitials={1} size={40}
+        title: "", render: rowData => <Avatar maxInitials={1} size={30}
         round={true} name={rowData === undefined ? " " : rowData.name} />
         },
-      { title: 'Name', field: 'name' },
+      { title: 'Name', field: 'name', },
       { title: 'email', field: 'email' },
       { title: 'Role', field: 'role'},
-     
+      
     ],
     data: [
-      { name: 'Jonh Nguyen', email: 'john.nguyen@sjsu.edu', role:'Student'},
+        { name: 'Jonh Nguyen', email: 'john.nguyen@sjsu.edu', role: 'Student' },
+        { name: 'Danny Mohamat', email: 'dannymoha@gmail.com', role:'T.A'},
       {
         name: 'Jessica Brown',
         email: 'jessica.brown@sjsu.edu',
