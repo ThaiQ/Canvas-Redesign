@@ -11,7 +11,7 @@ body {
 }
 
 .dashb-text{
-    color: rgb(238, 238, 238) !important;
+    color: rgba(238, 238, 238) !important;
 }
 
 .dashb-text .MuiSvgIcon-root {

@@ -1,20 +1,14 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
-=======
-import React, { useState, useEffect, useContext } from 'react';
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
-import { checkLogin } from '../util/auth'
+//import { checkLogin } from '../util/auth'
 import styled from '@emotion/styled';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
-<<<<<<< HEAD
-
-=======
+import GridList from '@material-ui/core/GridList';
 import { Link } from 'react-router-dom';
 import CourseHome from './CourseHome';
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
-
+import '../dashboard.css'
+//import Navbar from '../components/left-navbar/drawer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,13 +21,9 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: 150,
         width: 550,
-<<<<<<< HEAD
         height: 450,
         right: 500,
-=======
-        height: 150,
-        right: 300,
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
+       
 
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
@@ -52,7 +42,6 @@ const Course = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
-<<<<<<< HEAD
     const axios = require('axios')
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     const [courseName, setCourseName] = useState("")
@@ -110,45 +99,13 @@ const Course = (props) => {
     </div>
     );
 
- 
-=======
-
-    const body = (
-        <div className={classes.paper} >
-            <form className={classes.root} Validate autoComplete="on">
-                <TextField
-
-                    required
-                    id="course_name"
-                    label="Course Name"
-                    variant="outlined"
-
-                />
-                <TextField
-                    id="session"
-                    label="Session"
-                    variant="outlined"
-
-                />
-                <Cancel onClick={handleClose}>Cancel</Cancel>
-                <Add type="submit">Add</Add>
-
-
-            </form>
-        </div>
-    );
-
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
     return (
         <div>
 
             <Button1 variant="btn btn success" onClick={handleOpen}>Star a course</Button1>
             <Modal open={open} onClose={handleClose}>
-<<<<<<< HEAD
                {body}
-=======
                 {body}
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
             </Modal>
 
         </div>
@@ -157,54 +114,32 @@ const Course = (props) => {
 
 
 export default function StarCourse(props) {
-<<<<<<< HEAD
     
-=======
     //Making sure that user is login
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
     const [user, setUser] = useState(null);
     useEffect(() => {
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
         setUser(user)
-<<<<<<< HEAD
-        checkLogin(user) //redirect user to homepage if not login
+       // checkLogin(user) //redirect user to homepage if not login
         console.log(user)
     }, [])
     return (
         <div>
             <Course />
         </div>
-    );
-     }
-module.export = {Course}
+    //     <div>
+    //     <Navbar title='StartCourse' content={Course}></Navbar>
+    // </div>
+    )
+}
+     
+
 const blue = 100;
 const Cancel = styled.button`
 margin: 100px 120px;
 background: linear-gradient(to top, rgb(${blue},200,200),white );
 width: 100px; 
-height: 45px; 
-=======
-        // checkLogin(user) //redirect user to homepage if not login
-        console.log(user)
-    }, [])
-    return (
-
-        <div>
-            <Course />
-            {/* <CourseHome/> */}
-        </div>
-
-
-    );
-}
-const blue = 100;
-
-const Cancel = styled.button`
-margin: 100px 120px;
-background: linear-gradient(to top, rgb(${blue},200,200),white );
-width: 90px; 
-height: 35px; 
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
+height: 45px;  
 display: inline-block;
 text-align:center;
 border-radius: 10px;
@@ -218,22 +153,16 @@ const Add = styled.button`
 margin: 100px 0px;
 background: linear-gradient(to top, rgb(${blue},200,200),white );
 width: 100px; 
-<<<<<<< HEAD
 height: 45px; 
-=======
 height: 35px; 
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
 display: inline-block;
 text-align:center;
 border-radius: 10px;
 font-size: 15px;
 border: none;
 position: absolute;
-<<<<<<< HEAD
 left: 40px;
-=======
 right: 170px;
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
 cursor: pointer;
 `;
 

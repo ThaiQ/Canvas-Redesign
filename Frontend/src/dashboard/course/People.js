@@ -23,32 +23,32 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
-import { green } from '@material-ui/core/colors';
+import Navbar from '../../components/left-navbar/drawer'
 
 const tableIcons = {
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} style={{ color: green[500] }} />),
-  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} style={{ color:'white'}}  />),
+  Check: forwardRef((props, ref) => <Check {...props} ref={ref} style={{ color:'white'}}/>),
+  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref}  />),
   Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}  />),
+  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref}  />),
   Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} style={{ color:'white'}} />),
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref}  />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}  />),
+  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref}  />),
+  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} style={{ color:'white'}}/>),
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} style={{ color:'white'}} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref}  />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 
 };
 
-const api = axios.create({
-  baseURL: `https://reqres.in/api`
-})
+// const api = axios.create({
+//   baseURL: `https://reqres.in/api`
+// })
 
 
 function validateEmail(email) {
@@ -66,22 +66,27 @@ function People() {
     { title: "email", field: "email" },
     { title: "Role", field: "role" }
   ]
-  const [data, setData] = useState([]); //table data
+  const [data, setData] = useState({
+    //  [
+    //   { name: 'Jonh Nguyen', email: 'john.nguyen@sjsu.edu', role: 'Student' }
+    //   name: 'Jessica Brown', email:'jessica.brown@sjsu.edu',role:'T.A'},
+    //  ]
+  }); //table data
 
   //for error handling
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
-  useEffect(() => {
-    //   api.get("/users")
-    api.get("")
-      .then(res => {
-        setData(res.data.data)
-      })
-      .catch(error => {
-        console.log("Error")
-      })
-  }, [])
+  // useEffect(() => {
+  //   //  api.get("/users")
+  //   api.get("")
+  //     .then(res => {
+  //       setData(res.data.data)
+  //     })
+  //     .catch(error => {
+  //       console.log("Error")
+  //     })
+  // }, [])
 
   const handleRowUpdate = (newData, oldData, resolve) => {
     //validation
@@ -99,29 +104,30 @@ function People() {
       errorList.push("Invalid email")
     }
 
-    if (errorList.length < 1) {
-      api.patch("/users/" + newData.id, newData)
-        .then(res => {
-          const dataUpdate = [...data];
-          const index = oldData.tableData.id;
-          dataUpdate[index] = newData;
-          setData([...dataUpdate]);
-          resolve()
-          setIserror(false)
-          setErrorMessages([])
-        })
-        .catch(error => {
-          setErrorMessages(["Update failed! Server error"])
-          setIserror(true)
-          resolve()
 
-        })
-    } else {
-      setErrorMessages(errorList)
-      setIserror(true)
-      resolve()
+    // if (errorList.length < 1) {
+    //   api.patch("/users/" + newData.id, newData)
+    //     .then(res => {
+    //       const dataUpdate = [...data];
+    //       const index = oldData.tableData.id;
+    //       dataUpdate[index] = newData;
+    //       setData([...dataUpdate]);
+    //       resolve()
+    //       setIserror(false)
+    //       setErrorMessages([])
+    //     })
+    //     .catch(error => {
+    //       setErrorMessages(["Update failed! Server error"])
+    //       setIserror(true)
+    //       resolve()
 
-    }
+    //     })
+    // } else {
+    //   setErrorMessages(errorList)
+    //   setIserror(true)
+    //   resolve()
+
+    // }
 
   }
 
@@ -142,65 +148,54 @@ function People() {
     }
 
 
-    if (errorList.length < 1) { //no error
-      api.post("/users", newData)
-        .then(res => {
-          let dataToAdd = [...data];
-          dataToAdd.push(newData);
-          setData(dataToAdd);
-          resolve()
-          setErrorMessages([])
-          setIserror(false)
-        })
-        .catch(error => {
-          setErrorMessages(["Cannot add data. Server error!"])
-          setIserror(true)
-          resolve()
-        })
-    } else {
-      setErrorMessages(errorList)
-      setIserror(true)
-      resolve()
-    }
+    // if (errorList.length < 1) { //no error
+    //   api.post("/users", newData)
+    //     .then(res => {
+    //       let dataToAdd = [...data];
+    //       dataToAdd.push(newData);
+    //       setData(dataToAdd);
+    //       resolve()
+    //       setErrorMessages([])
+    //       setIserror(false)
+    //     })
+    //     .catch(error => {
+    //       setErrorMessages(["Cannot add data. Server error!"])
+    //       setIserror(true)
+    //       resolve()
+    //     })
+    // } else {
+    //   setErrorMessages(errorList)
+    //   setIserror(true)
+    //   resolve()
+    // }
 
 
   }
 
   const handleRowDelete = (oldData, resolve) => {
 
-    api.delete("/users/" + oldData.id)
-      .then(res => {
+    // api.delete("/users/" + oldData.id)
+    //   .then(res => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
         dataDelete.splice(index, 1);
         setData([...dataDelete]);
         resolve()
-      })
-      .catch(error => {
-        setErrorMessages(["Delete failed! Server error"])
-        setIserror(true)
-        resolve()
-      })
+      // .catch(error => {
+      //   setErrorMessages(["Delete failed! Server error"])
+      //   setIserror(true)
+      //   resolve()
+      // })
   }
 
-
-  return (
-<<<<<<< HEAD
-
-    <List>
-      
-      <Grid container spacing={1} >
-        <Grid item xs={3} ></Grid>
-        <Grid item xs={6} >
-=======
-    <List>
-      <Grid container spacing={1}>
-        <Grid item xs={3}></Grid>
-        <Grid item xs={6}>
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
-          <div>
+function Peo(){
+  return  <List style={{ color:'white'}}>
+      <Grid container spacing={1} style={{ color:'white'}} >
+        <Grid item xs={3} style={{ color:'white'}}></Grid>
+        <Grid item xs={6} style={{ color:'white'}} >
+        <div style={{ color:'white'}} >
             {iserror &&
-              <Alert severity="error">
+              <Alert severity="error" style={{ color:'white' }}>
                 {errorMessages.map((msg, i) => {
                   return <div key={i}>{msg}</div>
                 })}
@@ -208,10 +203,7 @@ function People() {
             }
           </div>
           <MaterialTable
-<<<<<<< HEAD
-           style ={{borderColor:"lightblue", borderStyle: 'solid'}}
-=======
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
+          style={{ borderColor: "lightblue", borderStyle: 'solid', width: '900px', color:'white', fontSize:'20px',background:'white' }}
             title=""
             columns={columns}
             data={data}
@@ -220,7 +212,6 @@ function People() {
               onRowUpdate: (newData, oldData) =>
                 new Promise((resolve) => {
                   handleRowUpdate(newData, oldData, resolve);
-
                 }),
               onRowAdd: (newData) =>
                 new Promise((resolve) => {
@@ -233,32 +224,25 @@ function People() {
             }}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={3} style={{ color:'white'}}></Grid>
       </Grid>
-<<<<<<< HEAD
-      </List>
-     
-=======
     </List>
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
-  );
 }
+     return(
+      <Navbar Title=' People' content={Peo} />
+      
+  );
+    
+  
+     }
 
 export default People;
 
 const List = styled.div`
    
-<<<<<<< HEAD
-    margin: 250px ;
-    width: 2000px; 
-    height: 100%;
+    margin: 170px ;
+    /* width: 200px;  */
+   
     position: absolute; 
-    left: -500px;
-=======
-    margin: 300px ;
-    width: 1500px; 
-    height: 100%;
-    position: absolute; 
-    left: -400px;
->>>>>>> 8dce802537e65babcb32460885d5e8ee035dd3da
+    left: -150px;
     `;
