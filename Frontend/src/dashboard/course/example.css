@@ -1,0 +1,16 @@
+.example-input{
+    margin: auto;
+    width: 50vw;
+    width: 50%;
+    padding: 10px;
+    border: solid black 5px;
+}
+
+#example-delete-text:hover{
+    color: blue;
+    cursor: pointer;
+}
+#example-edit-text:hover{
+    color: blue;
+    cursor: pointer;
+}

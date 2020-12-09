@@ -12,6 +12,9 @@ import ViewAssignments from './assignments/ViewAssignments';
 import EditAssignment from './assignments/EditAssignment'
 
 import Dashboard from './dashboard/dashboard'
+import HomeCourse from './dashboard/course/courseHome';
+import Peo from './dashboard/course/Peo';
+import CourseExample from './dashboard/course/example'
 
 // Add new routing path to new pages in here
 let routes = [
@@ -38,7 +41,22 @@ let routes = [
   {
     path: "/dashboard",
     component: Dashboard
-  }
+  },
+ 
+  {
+    path: "/course/example",
+    component: CourseExample
+  },
+
+  {
+    path: "/course/courseHome",
+    component: HomeCourse
+  },
+  {
+    path: "/course/Peo",
+    component: Peo
+  },
+ 
 ]
 
 const routing = (

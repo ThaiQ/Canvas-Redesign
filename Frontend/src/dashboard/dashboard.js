@@ -4,6 +4,7 @@ import './dashboard.css'
 import Grid from './grid'
 import Drawer from '../components/left-navbar/drawer'
 
+
 const Chart = require('chart.js')
 
 export default function Profile(props) {
@@ -24,7 +25,8 @@ export default function Profile(props) {
     return (
         <div className='dashboard-app'>
             hi
-            <Drawer title='Dashboard' content={Grid} user={user}/>
+            <Drawer title='Dashboard' content={Grid}  user={user}/>
+         
         </div>
     );
 }
