@@ -23,22 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function NestedGrid(props) {
     const classes = useStyles();
 
-    function FormRow() {
-        return (
-            <React.Fragment>
-                <Grid item xs={1}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-                <Grid item xs={1}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-                <Grid item xs={1}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-            </React.Fragment>
-        );
-    }
-
     return (
         <div id='dashboard-app'>
             <Grid style={{paddingLeft:'2vw'}} container spacing={4}>
