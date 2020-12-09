@@ -356,3 +356,13 @@ button:focus+.design-container {
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.course-section-list{
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.course-section-list:hover{
+  background-color: rgba(245, 245, 245, 0.308);
+  cursor: pointer;
+}
