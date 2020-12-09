@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Graph from './graph'
 import Card from '../components/card'
 import './dashboard.css'
 import Todo from './todo/todo'
-import AbuCard from './card/abuCard'
+import AbuCard from './card/collection'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,12 +37,8 @@ export default function NestedGrid(props) {
 
 
 
-                <Grid container item xs={8} spacing={0}>
+                <Grid container item xs={12} spacing={0}>
                     <AbuCard></AbuCard>
-                </Grid>
-
-                <Grid container item xs={4} spacing={0}>
-                    
                 </Grid>
 
             </Grid>
