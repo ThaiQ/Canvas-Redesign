@@ -141,7 +141,7 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {categories.map((category, index) => (
-          <Link to={category.href} className='drawer-link'>
+          <Link key={index} to={category.href} className='drawer-link'>
             <ListItem className='dashb-text' button key={index}>
               <ListItemIcon><category.icon /></ListItemIcon>
               <ListItemText primary={category.text} />

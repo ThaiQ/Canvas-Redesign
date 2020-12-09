@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import { Link } from 'react-router-dom'
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -49,12 +49,12 @@ export default function NestedList() {
                 <List component="div" disablePadding>
                     {
                         courses.map((course, indx) => {
-                            return <ListItem key={indx} button className={classes.nested}>
+                            return <Link to={'/coursedashboard/'+course.id} key={indx}><ListItem button className={classes.nested}>
                                 <ListItemIcon className='dashb-text'>
                                     <MenuBookIcon/>
                                 </ListItemIcon>
                                 <ListItemText className='dashb-text' primary={course.text} />
-                            </ListItem>
+                            </ListItem></Link>
                         })
                     }
                 </List>

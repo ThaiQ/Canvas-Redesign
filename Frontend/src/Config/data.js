@@ -4,42 +4,48 @@ let courses = [
         grade: 95,
         session: 1,
         semester: 'Fall-2020',
-        professor: "Dr. A"
+        professor: "Dr. A",
+        id: "id1",
     },
     {
         text: "BIO10",
         grade: 40,
         session: 3,
         semester: 'Fall-2020',
-        professor: "Dr. B"
+        professor: "Dr. B",
+        id: "id2"
     },
     {
         text: "CS146",
         grade: 80,
         session: 1,
         semester: 'Fall-2020',
-        professor: "Staff"
+        professor: "Staff",
+        id: "id3"
     },
     {
         text: "CS149",
         grade: 30,
         session: 2,
         semester: 'Fall-2020',
-        professor: "Dr. D"
+        professor: "Dr. D",
+        id: "id4"
     },
     {
         text: "CMPE120",
         grade: 70,
         session: 2,
         semester: 'Fall-2020',
-        professor: "Staff"
+        professor: "Staff",
+        id: "id5"
     },
     {
         text: "CMPE151",
         grade: 90,
         session: 1,
         semester: 'Fall-2020',
-        professor: "Dr. F"
+        professor: "Dr. F",
+        id: "id6"
     }
 ]
 
