@@ -6,6 +6,7 @@ let courses = [
         semester: 'Fall-2020',
         professor: "Dr. A",
         id: "id1",
+        time: 'Thr/Fri'
     },
     {
         text: "BIO10",
@@ -13,7 +14,8 @@ let courses = [
         session: 3,
         semester: 'Fall-2020',
         professor: "Dr. B",
-        id: "id2"
+        id: "id2",
+        time: 'Thr/Fri'
     },
     {
         text: "CS146",
@@ -21,7 +23,8 @@ let courses = [
         session: 1,
         semester: 'Fall-2020',
         professor: "Staff",
-        id: "id3"
+        id: "id3",
+        time: 'Tue'
     },
     {
         text: "CS149",
@@ -29,7 +32,8 @@ let courses = [
         session: 2,
         semester: 'Fall-2020',
         professor: "Dr. D",
-        id: "id4"
+        id: "id4",
+        time: 'Mon/Wed'
     },
     {
         text: "CMPE120",
@@ -37,7 +41,8 @@ let courses = [
         session: 2,
         semester: 'Fall-2020',
         professor: "Staff",
-        id: "id5"
+        id: "id5",
+        time: 'Mon/Wed'
     },
     {
         text: "CMPE151",
@@ -45,7 +50,8 @@ let courses = [
         session: 1,
         semester: 'Fall-2020',
         professor: "Dr. F",
-        id: "id6"
+        id: "id6",
+        time: 'Tue/Thur'
     }
 ]
 

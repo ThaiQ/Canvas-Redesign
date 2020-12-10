@@ -21,6 +21,10 @@ export default function BasicTable() {
 
     const {courses} = require('../../Config/data')
 
+    function navCourse(href){
+        window.location.href=href
+    }
+
     return (
         <TableContainer id='dash-table' component={Paper}>
             <Table className={classes.table} aria-label="simple table">
@@ -30,17 +34,19 @@ export default function BasicTable() {
                         <TableCell align="left">Session</TableCell>
                         <TableCell align="left">Semester</TableCell>
                         <TableCell align="left">Professor</TableCell>
+                        <TableCell align="left">Time</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {courses.map((row, ind) => (
-                        <TableRow key={ind} className='dash-class-cell'>
+                        <TableRow key={ind} className='dash-class-cell' onClick={()=>{navCourse('coursedashboard/'+row.id)}}>
                             <TableCell component="th" scope="row">
                                 {row.text}
                             </TableCell>
                             <TableCell align="left">{row.session}</TableCell>
                             <TableCell align="left">{row.semester}</TableCell>
                             <TableCell align="left">{row.professor}</TableCell>
+                            <TableCell align="left">{row.time}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
