@@ -52,13 +52,13 @@ export default function NestedGrid(props) {
                             flexDirection: 'row',
                             flexWrap: 'wrap'
                         }}>
-                        <h2 id='dashbc-sub' style={panel?{
+                        <h3 id='dashbc-sub' style={panel?{
                             textDecoration: 'underline',
 
-                            }:{textDecoration: 'none'}} className='gt cb-general' onClick={()=>{setPanel(true)}}>General</h2>
-                        <h2 id='dashbc-sub' style={panel?{textDecoration: 'none'}:{
+                            }:{textDecoration: 'none'}} className='gt cb-general' onClick={()=>{setPanel(true)}}>General</h3>
+                        <h3 id='dashbc-sub' style={panel?{textDecoration: 'none'}:{
                             textDecoration: 'underline',
-                            }} className='gt cb-todo' onClick={()=>{setPanel(false)}}>Todo List</h2>
+                            }} className='gt cb-todo' onClick={()=>{setPanel(false)}}>Todo List</h3>
                         </div>
 
                     {
