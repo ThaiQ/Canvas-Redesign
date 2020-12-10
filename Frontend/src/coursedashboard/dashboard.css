@@ -3,5 +3,17 @@
     text-align: left;
     color: white;
     transition: 0.3s;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
 
+.gt:hover{
+    background-color: rgba(218, 230, 240, 0.274);
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: underline;
+}
+
+.cb-todo{
+    border-left: solid white 2px;
+}

@@ -32,9 +32,9 @@ export default function NestedGrid(props) {
 
     const [panel, setPanel] = useState(true)
     const [panelStyle, setPanelStyle] = useState({
-        width: '60vw'
+        width: '60vw',
+        transition: '0.3s'
     })
-
 
     return (
         <div id='dashboard-app'>
@@ -52,8 +52,13 @@ export default function NestedGrid(props) {
                             flexDirection: 'row',
                             flexWrap: 'wrap'
                         }}>
-                        <h2 id='dashbc-sub' onClick={()=>{setPanel(true)}}>General</h2>
-                        <h2 id='dashbc-sub' style={{marginLeft:'2vw'}} onClick={()=>{setPanel(false)}}>Todo List</h2>
+                        <h2 id='dashbc-sub' style={panel?{
+                            textDecoration: 'underline',
+
+                            }:{textDecoration: 'none'}} className='gt cb-general' onClick={()=>{setPanel(true)}}>General</h2>
+                        <h2 id='dashbc-sub' style={panel?{textDecoration: 'none'}:{
+                            textDecoration: 'underline',
+                            }} className='gt cb-todo' onClick={()=>{setPanel(false)}}>Todo List</h2>
                         </div>
 
                     {
