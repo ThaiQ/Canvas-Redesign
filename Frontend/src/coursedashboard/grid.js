@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from 'react';
-import {checkLogin} from '../util/auth'
+import React, { useEffect, useState } from 'react';
+import { checkLogin } from '../util/auth'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Graph from './graph'
@@ -7,6 +7,7 @@ import Card from '../components/card'
 import './dashboard.css'
 import Todo from './todo/todo'
 import AbuCard from './card/collection'
+import General from './general/general'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,6 +30,11 @@ export default function NestedGrid(props) {
         console.log(user)
     }, [])
 
+    const [panel, setPanel] = useState(true)
+    const [panelStyle, setPanelStyle] = useState({
+        width: '60vw'
+    })
+
 
     return (
         <div id='dashboard-app'>
@@ -39,18 +45,29 @@ export default function NestedGrid(props) {
                         <h2 id='dashbc-sub'>{`Performance`}</h2>
                         <Card content={Graph} />
                     </Grid>
-                    <Grid item xs={6} spacing={10}>
-                        <Todo></Todo>
-                    </Grid>
+                    <Grid item xs={panel?3:4} spacing={10}>
+
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap'
+                        }}>
+                        <h2 id='dashbc-sub' onClick={()=>{setPanel(true)}}>General</h2>
+                        <h2 id='dashbc-sub' style={{marginLeft:'2vw'}} onClick={()=>{setPanel(false)}}>Todo List</h2>
+                        </div>
+
+                    {
+                        panel? <General style={panelStyle}></General> : <Todo style={panelStyle}></Todo>
+                    }
                 </Grid>
+            </Grid>
 
 
-
-                <Grid container item xs={12} spacing={0}>
-                    <AbuCard></AbuCard>
-                </Grid>
+            <Grid container item xs={12} spacing={0}>
+                <AbuCard></AbuCard>
+            </Grid>
 
             </Grid>
-        </div>
+        </div >
     );
 }

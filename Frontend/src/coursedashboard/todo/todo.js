@@ -51,7 +51,6 @@ export default function ImageGridList() {
 
     return (
         <div className={classes.root}>
-            <h2 id='dashbc-sub'>Todo List <CreateIcon id='dashbc-todo'/></h2>
             <GridList cellHeight={160} className={classes.gridList} cols={3}>
                 <Item></Item>
             </GridList>
