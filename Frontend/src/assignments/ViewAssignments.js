@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin }  from '../util/auth'
 import './ViewAssignments.css';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/left-navbar/drawer'
 const axios = require("axios")
 
 
@@ -19,9 +20,10 @@ export default function ViewAssignments() {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
         setAssignment(res.data.Items)
     }
-    return (
-        <div className="App"> 
-            <header className="App-header">
+    let ViewAssign=() => {
+        return (
+            <div className="App"> 
+            <header className="new-header">
                 { Assignment ? (
                     <>
                         <h1 id="title">
@@ -44,6 +46,10 @@ export default function ViewAssignments() {
                 ) }
             </header>
         </div>
+        )
+    }
+    return (
+        <Navbar title='View Assignments' content={ViewAssign}> </Navbar>
     )
 }
 

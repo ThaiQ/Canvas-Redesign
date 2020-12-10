@@ -6,19 +6,16 @@
     height: 40vmin;
     pointer-events: none;
   }
-  .bg {
-    background-color: #282c34;
-  }
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
       animation: App-logo-spin infinite 20s linear;
     }
   }
   #title {
+      color: #EEEEEE;
       font-size: 60px;
   }
-  .App-header {
-    background-color: #282c34;
+  .new-header {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -30,4 +27,6 @@
   .App-link {
     color: #61dafb;
   }
-  
+  .AssignmentInstance {
+    color: #EEEEEE;
+  }

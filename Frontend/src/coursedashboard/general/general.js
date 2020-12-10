@@ -18,8 +18,8 @@ const General = (props) => {
       href: '/dashboard'
     },
     {
-      text: 'Homeworks',
-      href: '/dashboard'
+      text: 'Assignments',
+      href: '/assignments'
     },
     {
       text: 'Quizzes/Tests',
