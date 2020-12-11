@@ -21,6 +21,9 @@ exports.putCourseHandler = async (event, context, callback) => {
     CourseID,
     InstructorID,
     Date,
+    People,
+    Grade,
+    Section
     } = typeof body === 'string' ? JSON.parse(body) : body;
 
     //Checking for errors
@@ -40,7 +43,10 @@ exports.putCourseHandler = async (event, context, callback) => {
             Session,
             CourseID : CourseID ? CourseID : 
             crypto.createHash('sha1').update(InstructorID+Session+CourseName+Date).digest('hex'),
-            InstructorID
+            InstructorID,
+            People,
+            Grade,
+            Section
         }
 
         // Creates a new item, or replaces an old item with a new item
