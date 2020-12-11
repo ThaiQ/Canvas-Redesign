@@ -46,6 +46,7 @@ export default function CreateAssignment() {
                     <Label for="category">Category </Label>
                     <Input type="select" name="Category" className="formElement dropdown" onChange={(event) => { setCategory(event.target.value) }} id="category">
                         <option value="" selected disabled hidden>Select Category</option>
+                        <option>Lecture</option>
                         <option>Homework</option>
                         <option>Quiz</option>
                         <option>Test</option>

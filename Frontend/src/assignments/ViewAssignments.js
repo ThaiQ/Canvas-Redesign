@@ -13,6 +13,7 @@ export default function ViewAssignments(props) {
         const params = props.match.params
         const body = JSON.stringify({CourseID:params.courseid})
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+        console.log(body)
         setUser(user)
         checkLogin(user) //redirect user to homepage if not login
         getAssignment(body)
@@ -20,7 +21,8 @@ export default function ViewAssignments(props) {
     },[])
     async function getAssignment(body) {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
-        setAssignment(res.data.Items)
+        let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid)
+        setAssignment(found)
     }
     let ViewAssign=() => {
         return (
