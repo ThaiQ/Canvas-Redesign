@@ -15,7 +15,7 @@ function AssignmentsHub() {
   
     return (
       <div className="App">
-        <header className="assignhub">
+        <header className="hub-header">
           {user? <Link to='/createassignment'>Create Assignment</Link>:''}
           {user? <Link to='/viewassignments'>View Assignments</Link>:''}
         </header>

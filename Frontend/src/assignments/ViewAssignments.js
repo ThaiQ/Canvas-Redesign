@@ -6,18 +6,20 @@ import Navbar from '../components/left-navbar/drawer'
 const axios = require("axios")
 
 
-export default function ViewAssignments() {
+export default function ViewAssignments(props) {
     const [user, setUser] = useState(null);
     const [Assignment, setAssignment] = useState(null);
     useEffect(()=>{
+        const params = props.match.params
+        const body = JSON.stringify({CourseID:params.courseid})
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
         setUser(user)
         checkLogin(user) //redirect user to homepage if not login
-        getAssignment()
+        getAssignment(body)
         console.log(user)
     },[])
-    async function getAssignment() {
-        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
+    async function getAssignment(body) {
+        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
         setAssignment(res.data.Items)
     }
     let ViewAssign=() => {

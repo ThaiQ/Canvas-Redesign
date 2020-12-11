@@ -29,7 +29,7 @@ let routes = [
     component: CreateAssignment,
   },
   {
-    path: "/viewassignments",
+    path: "/viewassignments/:courseid",
     component: ViewAssignments
   },
   {

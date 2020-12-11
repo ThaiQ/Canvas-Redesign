@@ -18,9 +18,9 @@ export default function CreateAssignment() {
     const [Points, setNumPoints] = useState ('')
     const [DueDate, setDueDate] = useState ('')
     const [Category, setCategory] = useState ('')
-    
+    const [CourseID, setCourseID] = useState ('')
     async function click() {
-        const body = JSON.stringify({Name, Description, Points, DueDate, Category, Closed: 1});
+        const body = JSON.stringify({Name, Description, Points, DueDate, Category, CourseID, Closed: 1});
         console.log(user)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
@@ -54,6 +54,10 @@ export default function CreateAssignment() {
                                 <option>Quiz</option>
                                 <option>Test</option>
                             </Input>
+                            <FormGroup>
+                                <Label for="courseID">Course </Label>
+                                <Input type="text" name="courseid" className="formElement" onChange={(event)=>{setCourseID(event.target.value)}} id="courseid" placeholder="Course" />
+                            </FormGroup>
                             <FormGroup check row>
                                 <Button onClick={()=>{click()}} id="submit">Submit</Button>
                             </FormGroup>
