@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './home/Home';
 import Profile from './profile/Profile';
 import AssignmentsHub from './assignments/AssignmentsHub'
-import CreateAssignment from './assignments/CreateAssignment'
+import CreateAssignment from './assignments/create/createdashboard'
 import ViewAssignments from './assignments/ViewAssignments';
 import EditAssignment from './assignments/EditAssignment'
 
