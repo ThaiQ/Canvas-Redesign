@@ -1,13 +1,11 @@
 .App {
     text-align: center;
     float: center;
+    background-color: rgb(27, 38, 53) !important;
   }
   .App-logo {
     height: 40vmin;
     pointer-events: none;
-  }
-  .bg {
-    background-color: #282c34;
   }
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
@@ -17,8 +15,7 @@
   #title {
       font-size: 60px;
   }
-  .App-header {
-    background-color: #282c34;
+  .create-header {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -32,6 +29,12 @@
   }
   ::placeholder {
     color: white;
+  }
+  .assignmentName {
+    color: #dfd9d9 !important;
+  }
+  .assignmentDescription {
+    color: #dfd9d9;
   }
   #assignmentName:focus, #assignmentDesc:focus, #numPoints:focus, #dueDate:focus, #category:focus {
     background-color: #8d8f8e !important;
