@@ -21,6 +21,7 @@ exports.putAssignmentHandler = async (event, context, callback) => {
             Category,
             Questions,
             AssignmentID,
+            CourseID,
             Submissions,
             Closed
         } = typeof body === 'string' ? JSON.parse(body) : body;
@@ -47,6 +48,7 @@ exports.putAssignmentHandler = async (event, context, callback) => {
             Category,
             Questions,
             AssignmentID : AssignmentID ? AssignmentID : crypto.createHash('sha1').update(Description + Points + Category + Questions).digest('hex'),
+            CourseID,
             Submissions,
             Closed
         }
