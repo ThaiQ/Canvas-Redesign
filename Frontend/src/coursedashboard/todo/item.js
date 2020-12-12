@@ -23,8 +23,26 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckboxList() {
   const classes = useStyles();
   const [status, setStatus] = useState(false);
-  //const [todo,setTodo] = useState(data.todo);
-  const {todo} = require('../../Config/data')
+  //const {todo} = require('../../Config/data')
+
+  let mock = [
+    {
+      text: "Homework 1",
+      due: 0,
+      done: false
+    },
+    {
+      text: "Quiz",
+      due: 4,
+      done: false
+    },
+    {
+        text: "Research Paper",
+        due: 6,
+        done: false
+    }
+  ]
+  const [todo,setTodo] = useState(mock);
 
   useEffect(()=>{},[todo])
 

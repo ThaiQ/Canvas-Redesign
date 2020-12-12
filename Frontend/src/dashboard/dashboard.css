@@ -48,3 +48,17 @@ body {
     transition: 0.3s;
     cursor: pointer;
 }
+
+.darkmodal{
+    margin-top: 15vh;
+    background-color: rgb(60, 78, 104);
+}
+
+.darkmodal .modal-header, .darkmodal .modal-body, .darkmodal .modal-footer, .darkmodal .close{
+    background-color: rgb(46, 62, 82);
+    color: white;
+}
+
+.darkmodal .form-control{
+    margin-bottom: 1vh;
+}
