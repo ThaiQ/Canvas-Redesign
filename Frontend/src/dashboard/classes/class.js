@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import '../dashboard.css'
+
+const axios = require('axios')
 
 const useStyles = makeStyles({
     table: {
@@ -19,10 +21,19 @@ const useStyles = makeStyles({
 export default function BasicTable() {
     const classes = useStyles();
 
-    const {courses} = require('../../Config/data')
+    useEffect(()=>{
+        getCourses()
+    },[])
+
+    const [courses, setCourses] = useState('')
 
     function navCourse(href){
         window.location.href=href
+    }
+
+    async function getCourses(){
+        let courses = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getCourse', JSON.stringify({}))
+        setCourses(courses.data.Items)
     }
 
     return (
@@ -38,17 +49,17 @@ export default function BasicTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {courses.map((row, ind) => (
-                        <TableRow key={ind} className='dash-class-cell' onClick={()=>{navCourse('coursedashboard/'+row.id)}}>
+                    {courses?courses.map((row, ind) => (
+                        <TableRow key={ind} className='dash-class-cell' onClick={()=>{navCourse('coursedashboard/'+row.CourseID)}}>
                             <TableCell component="th" scope="row">
-                                {row.text}
+                                {row.Description.text}
                             </TableCell>
-                            <TableCell align="left">{row.session}</TableCell>
-                            <TableCell align="left">{row.semester}</TableCell>
-                            <TableCell align="left">{row.professor}</TableCell>
-                            <TableCell align="left">{row.time}</TableCell>
+                            <TableCell align="left">{row.Session}</TableCell>
+                            <TableCell align="left">{row.Description.semester}</TableCell>
+                            <TableCell align="left">{row.Description.professor}</TableCell>
+                            <TableCell align="left">{row.Description.time}</TableCell>
                         </TableRow>
-                    ))}
+                    )):''}
                 </TableBody>
             </Table>
         </TableContainer>

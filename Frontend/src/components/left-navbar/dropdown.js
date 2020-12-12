@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState ,useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,6 +11,8 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ClassIcon from '@material-ui/icons/Class';
 import './dashboard.css'
+
+const axios = require('axios')
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,7 +32,20 @@ export default function NestedList() {
         setOpen(!open);
     };
 
-    const {courses} = require('../../Config/data')
+    useEffect(()=>{
+        getCourses()
+    },[])
+
+    const [courses, setCourses] = useState('')
+
+    function navCourse(href){
+        window.location.href=href
+    }
+
+    async function getCourses(){
+        let courses = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getCourse', JSON.stringify({}))
+        setCourses(courses.data.Items)
+    }
 
     return (
         <List
@@ -48,14 +63,14 @@ export default function NestedList() {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {
-                        courses.map((course, indx) => {
-                            return <Link to={'/coursedashboard/'+course.id} key={indx}><ListItem button className={classes.nested}>
+                        courses?courses.map((course, indx) => {
+                            return <Link to={'/coursedashboard/'+course.CourseID} key={indx}><ListItem button className={classes.nested}>
                                 <ListItemIcon className='dashb-text'>
                                     <MenuBookIcon/>
                                 </ListItemIcon>
-                                <ListItemText className='dashb-text' primary={course.text} />
+                                <ListItemText className='dashb-text' primary={course.Description.text} />
                             </ListItem></Link>
-                        })
+                        }):''
                     }
                 </List>
             </Collapse>

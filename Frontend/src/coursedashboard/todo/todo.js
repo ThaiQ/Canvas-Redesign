@@ -18,34 +18,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *     cols: 2,
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
-
-const tileData = [
-    {
-        text: 'https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg',
-        title: 'Image',
-        author: 'author',
-        cols: 2,
-    },
-]
-
 export default function ImageGridList() {
     const classes = useStyles();
 

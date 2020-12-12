@@ -10,7 +10,7 @@ function App(props) {
 
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     const [courseID, setCourseID] = useState(props.match.params.id)
-    const [course, setCourse] = useState('')
+    const [courseText, setCourseText] = useState('')
 
     useEffect(()=>{
         if (props.match.params.id!==courseID) window.location.reload(true)
@@ -19,16 +19,16 @@ function App(props) {
         getCourse()
     },[props.match.params.id])
 
-    function getCourse(){
-        let {courses} = require('../Config/data')
-        setCourseID(props.match.params.id)
-        let course = courses.filter(item=>item.id==courseID)
-        if (course.length > 0) setCourse(course[0])
+    async function getCourse(){
+        let body = {CourseID:courseID}
+        let course = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getCourse', JSON.stringify(body))
+        setCourseID(course.data.Item.CourseID)
+        if (course) setCourseText(course.data.Item)
     }
 
     return (
-        <div className="App">
-            <Nav title={course.text} content={Grid}></Nav>
+        <div className="App"> {console.log(courseText)}
+            <Nav title={courseText?courseText.Description.text:''} content={Grid}></Nav>
         </div>
     );
 }
