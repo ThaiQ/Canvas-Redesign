@@ -1,0 +1,15 @@
+.formElement {
+    box-sizing: border-box;
+    color: #dfd9d9 !important;
+    background-color: #51535a !important;
+  }
+  .dropdown:hover .dropbtn {
+    background-color: #51535a !important;
+  }
+  #closed:focus {
+    background-color: #8d8f8e !important;
+  }
+  ::placeholder {
+    color: #dfd9d9 !important;
+  }
+  

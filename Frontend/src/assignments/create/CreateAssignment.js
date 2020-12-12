@@ -18,7 +18,7 @@ export default function CreateAssignment(props) {
     const [Category, setCategory] = useState('')
     const [CourseID, setCourseID] = useState('')
     async function click() {
-        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed: 1 });
+        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed: "Yes" });
         console.log(user)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
