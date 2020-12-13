@@ -16,15 +16,15 @@ export default function SubmitAssignment(props) {
         getAssignment(params.assignmentid)
     }, [])
     async function click() {
-        const body = JSON.stringify({ FilePath:'', Answers, Grade:'', AssignmentID, StudentID });
+        let body = { FilePath:'', Answers, Grade:'', AssignmentID, StudentID };
         Assignment.Submissions.push(body)
         body = Assignment
-        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
+        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
     }
     async function getAssignment(id) {
         setStudentID(user.StudentID.toString())
         console.log(StudentID)
-        const body = JSON.stringify({AssignmentID:id})
+        let body = JSON.stringify({AssignmentID:id})
         console.log("API Request:", body)
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
         console.log("API Response:", res.data.Item)
