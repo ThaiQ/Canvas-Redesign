@@ -4,21 +4,15 @@ import { AvForm, AvInput } from 'availity-reactstrap-validation';
 
 class Peo extends Component {
   state = {};
-//   edit = () => {
-//     this.setState(prevState => ({
-//       editing: !prevState.editing,
-//     }));
-//   }
-
   save = (event, values) => {
     this.setState(prevState => ({
-      editing: !prevState.editing,
+        editing: !prevState.editing, 
     }));
-    this.props.edit(this.props.name, values);
+    this.props.edit(this.props.username, values);
   }
 
   remove = () => {
-    this.props.remove(this.props.name);
+    this.props.remove(this.props.id);
   }
   render() {
     return (
@@ -26,9 +20,9 @@ class Peo extends Component {
         <td>
           {this.state.editing
             ? <AvForm onValidSubmit={this.save}>
-            <AvInput name="name" defaultValue={this.props.name} /> 
+            <AvInput name="username" defaultValue={this.props.username} /> 
             </AvForm>
-             : this.props.name}
+             : this.props.username}
             </td>
             <td>
           {this.state.editing
@@ -44,9 +38,6 @@ class Peo extends Component {
             </AvForm>
             : this.props.role}
         </td>
-        {/* <td>
-        <Button color="info" onClick={this.edit}>{this.state.editing ? 'Cancel' : 'Edit'}</Button>
-        </td> */}
         <td><Button outline color="primary" onClick={this.remove}>Remove</Button></td>
       </tr>
     )

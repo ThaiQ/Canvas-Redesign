@@ -13,7 +13,7 @@ import EditAssignment from './assignments/EditAssignment'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
-import People from './people/People'
+import People from './people/people'
 
 
 // Add new routing path to new pages in here
@@ -47,7 +47,7 @@ let routes = [
     component: CourseBoard
   },
   {
-    path: "/people/People",
+    path: "/people/people",
     component: People
   }
 ]
