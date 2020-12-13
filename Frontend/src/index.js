@@ -7,9 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './home/Home';
 import Profile from './profile/Profile';
 import AssignmentsHub from './assignments/AssignmentsHub'
-import CreateAssignment from './assignments/create/createdashboard'
+import CreateAssignment from './assignments/create/CreateAssignment'
 import ViewAssignments from './assignments/ViewAssignments';
 import EditAssignment from './assignments/EditAssignment'
+import SubmitAssignment from './assignments/SubmitAssignment'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
@@ -25,7 +26,7 @@ let routes = [
     component: AssignmentsHub,
   },
   {
-    path: "/createassignment",
+    path: "/createassignment/:courseid",
     component: CreateAssignment,
   },
   {
@@ -33,8 +34,12 @@ let routes = [
     component: ViewAssignments
   },
   {
-      path : "/editassignment/:assignmentid",
-      component: EditAssignment
+    path: "/editassignment/:assignmentid",
+    component: EditAssignment
+  },
+  {
+    path: "/submitassignment/:assignmentid",
+    component: SubmitAssignment
   },
   {
     path: "/dashboard",

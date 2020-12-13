@@ -37,7 +37,7 @@ export default function ViewAssignments(props) {
                             {Assignment? Assignment.map((element, index)=>{
                                 return (
                                     <div className="AssignmentInstance">
-                                        {element.Name}: {element.Points} points, due on {element.DueDate}. <Link to = {`/editassignment/${element.AssignmentID}`}>Edit</Link>
+                                        {element.Name}: {element.Points} points, due on {element.DueDate}. <Link to = {`/editassignment/${element.AssignmentID}`}>Edit</Link> <Link to = {`/submitassignment/${element.AssignmentID}`}>Submit</Link>
                                     </div> 
                                 )
                             }):''}

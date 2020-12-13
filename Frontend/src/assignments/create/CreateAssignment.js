@@ -4,12 +4,13 @@ import './CreateAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 const axios = require("axios")
 
-export default function CreateAssignment() {
+export default function CreateAssignment(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     useEffect(() => {
         checkLogin(user) //redirect user to homepage if not login
         console.log(user)
     }, [])
+    const params = props.match.params
     const [Name, setAssignmentName] = useState('')
     const [Description, setAssignmentDesc] = useState('')
     const [Points, setNumPoints] = useState('')
@@ -17,7 +18,7 @@ export default function CreateAssignment() {
     const [Category, setCategory] = useState('')
     const [CourseID, setCourseID] = useState('')
     async function click() {
-        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, CourseID, Closed: 1 });
+        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed: "Yes" });
         console.log(user)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
@@ -51,10 +52,6 @@ export default function CreateAssignment() {
                         <option>Quiz</option>
                         <option>Test</option>
                     </Input>
-                    <FormGroup>
-                        <Label for="courseID">Course </Label>
-                        <Input type="text" name="courseid" className="formElement" onChange={(event) => { setCourseID(event.target.value) }} id="courseid" placeholder="Course" />
-                    </FormGroup>
                     <FormGroup check row>
                         <Button onClick={() => { click() }} id="submit">Submit</Button>
                     </FormGroup>
