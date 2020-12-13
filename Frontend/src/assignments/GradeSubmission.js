@@ -4,6 +4,7 @@ import './EditAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 const axios = require("axios")
 
+
 export default function GradeSubmission(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     const [Submission, setSubmission] = useState(null)
@@ -13,19 +14,26 @@ export default function GradeSubmission(props) {
         checkLogin(user) //redirect user to homepage if not login
         const params = props.match.params
         getSubmission(params.assignmentid, params.submissionid)
-        console.log(user)
     }, [])
     async function click() {
-        const body = JSON.stringify({ FilePath:Submission.FilePath, Answers:Submission.Answers, Grade:Grade, AssignmentID:Submission.AssignmentID, StudentID:Submission.StudentID });
+        let submission = { FilePath:Submission.FilePath, Answers:Submission.Answers, Grade:Grade, AssignmentID:Submission.AssignmentID, StudentID:Submission.StudentID, SubmissionID:Submission.SubmissionID};
+        console.log(submission)
+        for (var i = 0; i < Assignment.Submissions.length; i++) {
+            console.log(Assignment.Submissions[i].StudentID)
+            console.log(submission.StudentID)
+            if (Assignment.Submissions[i].StudentID === submission.StudentID) {
+                Assignment.Submissions[i] = submission
+            }
+        }
+        const body = Assignment
         console.log(body)
-        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putSubmission", body)
+        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
     }
     async function getSubmission(assignid, subid) {
-        const body = JSON.stringify({AssignmentID:assignid})
+        let body = JSON.stringify({AssignmentID:assignid})
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
         setAssignment(res.data.Item)
-        setSubmission(Assignment.Submissions.find(element => element.SubmissionID === subid))
-        console.log(Submission)
+        setSubmission(res.data.Item.Submissions.find(element => element.SubmissionID === subid))
     }
 
     return (

@@ -3,11 +3,11 @@ import { checkLogin } from '../util/auth'
 import './EditAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 const axios = require("axios")
+const crypto = require('crypto');
 
 export default function SubmitAssignment(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     const [Answers, setAnswers] = useState('')
-    const [AssignmentID, setAssignmentID] = useState('')
     const [Assignment, setAssignment] = useState('')
     const [StudentID, setStudentID] = useState('')
     useEffect(() => {
@@ -16,10 +16,22 @@ export default function SubmitAssignment(props) {
         getAssignment(params.assignmentid)
     }, [])
     async function click() {
-        let body = { FilePath:'', Answers, Grade:'', AssignmentID, StudentID };
-        Assignment.Submissions.push(body)
-        body = Assignment
+        let submission = { FilePath:'', Answers, Grade:'', AssignmentID:props.match.params.assignmentid, StudentID, SubmissionID:crypto.createHash('sha1').update(props.match.params.assignmentid + StudentID).digest('hex') };
+        var state = 0
+        console.log(submission.StudentID)
+        for (var i = 0; i < Assignment.Submissions.length; i++) {
+            if (Assignment.Submissions[i].StudentID === submission.StudentID) {
+                Assignment.Submissions[i] = submission
+                state = 1
+            }
+        }
+        if (state == 0) {
+            Assignment.Submissions.push(submission)
+        }
+        console.log(Assignment)
+        let body = Assignment
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
+        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
     }
     async function getAssignment(id) {
         setStudentID(user.StudentID.toString())
