@@ -17,7 +17,7 @@ export default function SubmitAssignment(props) {
         console.log(user)
     }, [])
     async function click() {
-        const body = JSON.stringify({ Answers, AssignmentID, StudentID });
+        const body = JSON.stringify({ FilePath:'', Answers, Grade:'', AssignmentID, StudentID });
         console.log(body)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putSubmission", body)
     }
@@ -27,7 +27,7 @@ export default function SubmitAssignment(props) {
             <header className="create-header">
                 <div className="Form">
                     <FormGroup>
-                        <Label for="assignmentAnswers">Assignment Description </Label>
+                        <Label for="assignmentAnswers">Enter Submission Here</Label>
                         <Input type="textarea" name="ans" className="formElement" onChange={(event) => { setAnswers(event.target.value) }} id="ans" placeholder="Enter Submission" />
                     </FormGroup>
                     <FormGroup check row>
