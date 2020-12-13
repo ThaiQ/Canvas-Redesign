@@ -16,7 +16,6 @@ export default function CreateAssignment(props) {
     const [Points, setNumPoints] = useState('')
     const [DueDate, setDueDate] = useState('')
     const [Category, setCategory] = useState('')
-    const [CourseID, setCourseID] = useState('')
     async function click() {
         const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed: "Yes" });
         console.log(user)

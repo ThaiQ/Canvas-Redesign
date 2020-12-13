@@ -6,20 +6,30 @@ const axios = require("axios")
 
 export default function SubmitAssignment(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
-    const [Answers, setAnswers] = useState(null)
-    const [AssignmentID, setAssignmentID] = useState(null)
-    const [StudentID, setStudentID] = useState(null)
+    const [Answers, setAnswers] = useState('')
+    const [AssignmentID, setAssignmentID] = useState('')
+    const [Assignment, setAssignment] = useState('')
+    const [StudentID, setStudentID] = useState('')
     useEffect(() => {
         checkLogin(user) //redirect user to homepage if not login
         const params = props.match.params
-        setAssignmentID(params.assignmentid)
-        setStudentID(user.StudentID.toString())
-        console.log(user)
+        getAssignment(params.assignmentid)
     }, [])
     async function click() {
         const body = JSON.stringify({ FilePath:'', Answers, Grade:'', AssignmentID, StudentID });
-        console.log(body)
-        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putSubmission", body)
+        Assignment.Submissions.push(body)
+        body = Assignment
+        let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
+    }
+    async function getAssignment(id) {
+        setStudentID(user.StudentID.toString())
+        console.log(StudentID)
+        const body = JSON.stringify({AssignmentID:id})
+        console.log("API Request:", body)
+        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
+        console.log("API Response:", res.data.Item)
+        setAssignment(res.data.Item)
+        console.log(Assignment)
     }
 
     return (

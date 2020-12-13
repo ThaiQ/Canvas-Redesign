@@ -11,6 +11,8 @@ import CreateAssignment from './assignments/create/CreateAssignment'
 import ViewAssignments from './assignments/ViewAssignments';
 import EditAssignment from './assignments/EditAssignment'
 import SubmitAssignment from './assignments/SubmitAssignment'
+import GradeSubmission from './assignments/GradeSubmission'
+import ViewSubmissions from './assignments/ViewSubmissions'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
@@ -40,6 +42,14 @@ let routes = [
   {
     path: "/submitassignment/:assignmentid",
     component: SubmitAssignment
+  },
+  {
+    path: "/gradesubmission/:assignmentid/:submissionid",
+    component: GradeSubmission
+  },
+  {
+    path: "/viewsubmissions/:assignmentid/:studentid",
+    component: ViewSubmissions
   },
   {
     path: "/dashboard",
