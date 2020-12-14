@@ -24,32 +24,68 @@ export default function ViewAssignments(props) {
         setAssignment(found)
     }
     let ViewAssign=() => {
-        return (
-            <div className="App"> 
-            <header className="new-header">
-                { Assignment ? (
-                    <>
-                        <h1 id="title">
-                        All Assignments:
-                        </h1>
-                        <div className="AssignmentDisplay">
-                            {Assignment? Assignment.map((element, index)=>{
-                                return (
-                                    <div className="AssignmentInstance">
-                                        {element.Name}: {element.Points} points, due on {element.DueDate}. <Link to = {`/editassignment/${element.AssignmentID}`}><u>Edit Assignment</u></Link> <Link to = {`/submitassignment/${element.AssignmentID}`}><u>Post Submission</u></Link> <Link to = {`/viewsubmissions/${element.AssignmentID}`}><u>View Submissions</u></Link>
-                                    </div> 
-                                )
-                            }):''}
+        if (user.AccessLevel === "Teacher") {
+            return (
+                <div className="App"> 
+                <header className="new-header">
+                    { Assignment ? (
+                        <>
+                            <h1 id="title">
+                            All Assignments
+                            </h1>
+                            <div className="AssignmentDisplay">
+                                {Assignment? Assignment.map((element, index)=>{
+                                    return (
+                                        <div className="AssignmentInstance">
+                                            {element.Name}: {element.Points} points, due on {element.DueDate}.<br/>
+                                            <Link to = {`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u>&nbsp;&nbsp;</Link> 
+                                            <Link to = {`/editassignment/${element.AssignmentID}`}><u>Edit Assignment</u>&nbsp;&nbsp;</Link>  
+                                            <Link to = {`/viewsubmissions/${element.AssignmentID}`}><u>View Submissions</u>&nbsp;&nbsp;</Link>
+                                            <Link to = {`/deleteassignment/${element.AssignmentID}`}><u>Delete Assignment</u>&nbsp;&nbsp;</Link> 
+                                        </div> 
+                                    )
+                                }):''}
+                            </div>
+                        </>
+                    ) : (
+                        <div>
+                            {'Waiting for API'}
                         </div>
-                    </>
-                ) : (
-                    <div>
-                        {'Waiting for API'}
-                    </div>
-                ) }
-            </header>
-        </div>
-        )
+                    ) }
+                </header>
+            </div>
+            )
+        }
+        else {
+            return (
+                <div className="App"> 
+                <header className="new-header">
+                    { Assignment ? (
+                        <>
+                            <h1 id="title">
+                            All Assignments
+                            </h1>
+                            <div className="AssignmentDisplay">
+                                {Assignment? Assignment.map((element, index)=>{
+                                    return (
+                                        <div className="AssignmentInstance">
+                                            {element.Name}: {element.Points} points, due on {element.DueDate}.<br/>
+                                            <Link to = {`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u>&nbsp;&nbsp;</Link>  
+                                            <Link to = {`/submitassignment/${element.AssignmentID}`}><u>Post Submission</u>&nbsp;&nbsp;</Link>  
+                                        </div> 
+                                    )
+                                }):''}
+                            </div>
+                        </>
+                    ) : (
+                        <div>
+                            {'Waiting for API'}
+                        </div>
+                    ) }
+                </header>
+            </div>
+            )
+        }
     }
     return (
         <Navbar title='View Assignments' content={ViewAssign}> </Navbar>

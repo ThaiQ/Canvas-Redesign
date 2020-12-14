@@ -8,12 +8,14 @@ import Home from './home/Home';
 import Profile from './profile/Profile';
 import AssignmentsHub from './assignments/AssignmentsHub'
 import CreateAssignment from './assignments/create/CreateAssignment'
-import ViewAssignments from './assignments/ViewAssignments';
+import ViewAssignments from './assignments/ViewAssignments'
+import ViewAssignment from './assignments/ViewAssignment';
 import EditAssignment from './assignments/EditAssignment'
 import SubmitAssignment from './assignments/SubmitAssignment'
 import GradeSubmission from './assignments/GradeSubmission'
 import ViewSubmissions from './assignments/ViewSubmissions'
 import ViewSubmission from './assignments/ViewSubmission'
+import DeleteAssignment from './assignments/DeleteAssignment'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
@@ -37,6 +39,10 @@ let routes = [
     component: ViewAssignments
   },
   {
+    path: "/viewassignment/:assignmentid",
+    component: ViewAssignment
+  },
+  {
     path: "/editassignment/:assignmentid",
     component: EditAssignment
   },
@@ -53,8 +59,12 @@ let routes = [
     component: ViewSubmissions
   },
   {
-    path: "/viewsubmission/:assignmentid/:studentid",
+    path: "/viewsubmission/:assignmentid/:submissionid",
     component: ViewSubmission
+  },
+  {
+    path: "/deleteassignment/:assignmentid",
+    component: DeleteAssignment
   },
   {
     path: "/dashboard",

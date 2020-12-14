@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin } from '../util/auth'
 import './EditAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
+import Navbar from '../components/left-navbar/drawer'
 const axios = require("axios")
 const crypto = require('crypto');
 
@@ -43,20 +44,24 @@ export default function SubmitAssignment(props) {
         setAssignment(res.data.Item)
         console.log(Assignment)
     }
-
-    return (
-        <div className="App">
-            <header className="create-header">
-                <div className="Form">
-                    <FormGroup>
-                        <Label for="assignmentAnswers">Enter Submission Here</Label>
-                        <Input type="textarea" name="ans" className="formElement" onChange={(event) => { setAnswers(event.target.value) }} id="ans" placeholder="Enter Submission" />
-                    </FormGroup>
-                    <FormGroup check row>
-                        <Button onClick={() => { click() }} id="submit">Submit</Button>
-                    </FormGroup>
-                </div>
-            </header>
-        </div>
-    )
+    //let subAssign=() => {
+        return (
+            <div className="App">
+                <header className="create-header">
+                    <div className="Form">
+                        <FormGroup>
+                            <Label for="assignmentAnswers">Enter Submission Here</Label>
+                            <Input type="textarea" name="ans" className="formElement" onChange={(event) => { setAnswers(event.target.value) }} id="ans" placeholder="Submission" />
+                        </FormGroup>
+                        <FormGroup check row>
+                            <Button onClick={() => { click() }} id="submit">Submit</Button>
+                        </FormGroup>
+                    </div>
+                </header>
+            </div>
+        )
+    //}
+    // return (
+    //     <Navbar title='Submit Assignment' content={subAssign}> </Navbar>
+    // )
 }

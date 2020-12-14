@@ -21,6 +21,7 @@ export default function CreateAssignment(props) {
         console.log(user)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
+        window.location.href = "/viewAssignments/".concat(params.courseid)
     }
 
     return (
