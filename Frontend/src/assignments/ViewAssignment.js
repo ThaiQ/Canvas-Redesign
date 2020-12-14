@@ -22,8 +22,11 @@ export default function ViewAssignment(props) {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
         let found = await res.data.Items.filter(elem => elem.AssignmentID === props.match.params.assignmentid)
         setAssignment(found[0])
-        let sub = found[0].Submissions.filter(elem => elem.SubmissionID === props.match.params.submissionid)[0]
-        setSubmission(sub);
+        if (found[0]) {
+            let sub = found[0].Submissions.filter(elem => elem.SubmissionID === props.match.params.submissionid)[0]
+            setSubmission(sub);
+        }
+        console.log(found[0])
     }
     let ViewAssign=() => {
         return (
@@ -36,14 +39,29 @@ export default function ViewAssignment(props) {
                         </h1>
                         <div className="AssignmentDisplay">
                             <div>
+                                <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>
+                                <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link>
+                                <Link to = {`/createquestion/${Assignment.AssignmentID}`}><u>Add Question  </u>&nbsp;&nbsp;</Link> 
+                                <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Post Submission  </u>&nbsp;&nbsp;</Link>
+                                <br/>
                                 Points: {Assignment.Points}
                                 <br/>
                                 Assignment Description: {Assignment.Description}
                                 <br/>
-                                <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>
-                                <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link> 
-                                <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Post Submission  </u>&nbsp;&nbsp;</Link>
                             </div> 
+                            {Assignment.Questions? Assignment.Questions.map((element, index)=>{
+                                    return (
+                                        <div className="AssignmentInstance">
+                                            <br/>
+                                            <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>
+                                            <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u>&nbsp;&nbsp;</Link>
+                                            <br/>
+                                            Question {Assignment.Questions.indexOf(element) + 1}: {element.QuestionType} worth {element.Points} points.<br/>
+                                            {element.Description}
+                                            <br/>
+                                        </div> 
+                                    )
+                                }):''}
                         </div>
                     </>
                 ) : (

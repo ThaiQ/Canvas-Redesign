@@ -19,6 +19,7 @@ export default function CreateAssignment(props) {
     async function click() {
         const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed: "Yes" });
         console.log(user)
+        console.log(body)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
         window.location.href = "/viewAssignments/".concat(params.courseid)

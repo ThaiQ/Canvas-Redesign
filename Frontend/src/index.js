@@ -4,18 +4,21 @@ import './index.css'; // Global CSS
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Home from './home/Home';
-import Profile from './profile/Profile';
+import Home from './home/Home'
+import Profile from './profile/Profile'
 import AssignmentsHub from './assignments/AssignmentsHub'
 import CreateAssignment from './assignments/create/CreateAssignment'
+import CreateQuestion from './assignments/CreateQuestion'
 import ViewAssignments from './assignments/ViewAssignments'
-import ViewAssignment from './assignments/ViewAssignment';
+import ViewAssignment from './assignments/ViewAssignment'
 import EditAssignment from './assignments/EditAssignment'
+import EditQuestion from './assignments/EditQuestion'
 import SubmitAssignment from './assignments/SubmitAssignment'
 import GradeSubmission from './assignments/GradeSubmission'
 import ViewSubmissions from './assignments/ViewSubmissions'
 import ViewSubmission from './assignments/ViewSubmission'
 import DeleteAssignment from './assignments/DeleteAssignment'
+import DeleteQuestion from './assignments/DeleteQuestion'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
@@ -28,11 +31,15 @@ let routes = [
   },
   {
     path: "/assignments",
-    component: AssignmentsHub,
+    component: AssignmentsHub
   },
   {
     path: "/createassignment/:courseid",
-    component: CreateAssignment,
+    component: CreateAssignment
+  },
+  {
+    path: "/createquestion/:assignmentid",
+    component: CreateQuestion
   },
   {
     path: "/viewassignments/:courseid",
@@ -45,6 +52,10 @@ let routes = [
   {
     path: "/editassignment/:assignmentid",
     component: EditAssignment
+  },
+  {
+    path: "/editquestion/:assignmentid/:questionid",
+    component: EditQuestion
   },
   {
     path: "/submitassignment/:assignmentid",
@@ -65,6 +76,10 @@ let routes = [
   {
     path: "/deleteassignment/:assignmentid",
     component: DeleteAssignment
+  },
+  {
+    path:"/deletequestion/:assignmentid/:questionid",
+    component: DeleteQuestion
   },
   {
     path: "/dashboard",
