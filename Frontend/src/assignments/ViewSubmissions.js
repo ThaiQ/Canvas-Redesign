@@ -8,36 +8,37 @@ const axios = require("axios")
 
 export default function ViewSubmissions(props) {
     const [user, setUser] = useState(null);
+    const [Submissions, setSubmissions] = useState(null);
     const [Assignment, setAssignment] = useState(null);
     useEffect(()=>{
         const params = props.match.params
-        const body = JSON.stringify({CourseID:params.courseid})
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-        console.log(body)
         setUser(user)
         checkLogin(user) //redirect user to homepage if not login
-        getAssignment(body)
+        getSubmissions()
         console.log(user)
     },[])
-    async function getAssignment(body) {
-        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
-        let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid)
-        setAssignment(found)
+    async function getSubmissions() {
+        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
+        let found = await res.data.Items.filter(elem => elem.AssignmentID === props.match.params.assignmentid)
+        console.log(found[0])
+        setAssignment(found[0])
+        setSubmissions(found[0].Submissions);
     }
-    let ViewAssign=() => {
+    let ViewSubs=() => {
         return (
             <div className="App"> 
             <header className="new-header">
-                { Assignment ? (
+                { Submissions ? (
                     <>
                         <h1 id="title">
-                        All Assignments:
+                        All Submissions:
                         </h1>
                         <div className="AssignmentDisplay">
-                            {Assignment? Assignment.map((element, index)=>{
+                            {Submissions? Submissions.map((element, index)=>{
                                 return (
                                     <div className="AssignmentInstance">
-                                        {element.Name}: {element.Points} points, due on {element.DueDate}. <Link to = {`/editassignment/${element.AssignmentID}`}>Edit</Link> <Link to = {`/submitassignment/${element.AssignmentID}`}>Submit</Link>
+                                        Submission by ID {element.StudentID} Grade: {element.Grade}/{Assignment.Points} <Link to = {`/viewsubmission/${element.SubmissionID}`}><u>View Submission</u></Link> <Link to = {`/gradesubmission/${element.AssignmentID}/${element.SubmissionID}`}><u>Grade</u></Link>
                                     </div> 
                                 )
                             }):''}
@@ -53,7 +54,7 @@ export default function ViewSubmissions(props) {
         )
     }
     return (
-        <Navbar title='View Assignments' content={ViewAssign}> </Navbar>
+        <Navbar title='View Assignments' content={ViewSubs}> </Navbar>
     )
 }
 

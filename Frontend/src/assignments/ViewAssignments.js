@@ -11,16 +11,15 @@ export default function ViewAssignments(props) {
     const [Assignment, setAssignment] = useState(null);
     useEffect(()=>{
         const params = props.match.params
-        const body = JSON.stringify({CourseID:params.courseid})
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-        console.log(body)
         setUser(user)
         checkLogin(user) //redirect user to homepage if not login
-        getAssignment(body)
+        getAssignment()
         console.log(user)
     },[])
-    async function getAssignment(body) {
-        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', body)
+    async function getAssignment() {
+        let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
+        console.log(res.data.Items)
         let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid)
         setAssignment(found)
     }
@@ -37,7 +36,7 @@ export default function ViewAssignments(props) {
                             {Assignment? Assignment.map((element, index)=>{
                                 return (
                                     <div className="AssignmentInstance">
-                                        {element.Name}: {element.Points} points, due on {element.DueDate}. <Link to = {`/editassignment/${element.AssignmentID}`}>Edit</Link> <Link to = {`/submitassignment/${element.AssignmentID}`}>Submit</Link>
+                                        {element.Name}: {element.Points} points, due on {element.DueDate}. <Link to = {`/editassignment/${element.AssignmentID}`}><u>Edit Assignment</u></Link> <Link to = {`/submitassignment/${element.AssignmentID}`}><u>Post Submission</u></Link> <Link to = {`/viewsubmissions/${element.AssignmentID}`}><u>View Submissions</u></Link>
                                     </div> 
                                 )
                             }):''}

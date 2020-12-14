@@ -17,10 +17,7 @@ export default function GradeSubmission(props) {
     }, [])
     async function click() {
         let submission = { FilePath:Submission.FilePath, Answers:Submission.Answers, Grade:Grade, AssignmentID:Submission.AssignmentID, StudentID:Submission.StudentID, SubmissionID:Submission.SubmissionID};
-        console.log(submission)
         for (var i = 0; i < Assignment.Submissions.length; i++) {
-            console.log(Assignment.Submissions[i].StudentID)
-            console.log(submission.StudentID)
             if (Assignment.Submissions[i].StudentID === submission.StudentID) {
                 Assignment.Submissions[i] = submission
             }
@@ -28,6 +25,7 @@ export default function GradeSubmission(props) {
         const body = Assignment
         console.log(body)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
+        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
     }
     async function getSubmission(assignid, subid) {
         let body = JSON.stringify({AssignmentID:assignid})

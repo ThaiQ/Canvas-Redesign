@@ -13,6 +13,7 @@ import EditAssignment from './assignments/EditAssignment'
 import SubmitAssignment from './assignments/SubmitAssignment'
 import GradeSubmission from './assignments/GradeSubmission'
 import ViewSubmissions from './assignments/ViewSubmissions'
+import ViewSubmission from './assignments/ViewSubmission'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
@@ -48,8 +49,12 @@ let routes = [
     component: GradeSubmission
   },
   {
-    path: "/viewsubmissions/:assignmentid/:studentid",
+    path: "/viewsubmissions/:assignmentid",
     component: ViewSubmissions
+  },
+  {
+    path: "/viewsubmission/:assignmentid/:studentid",
+    component: ViewSubmission
   },
   {
     path: "/dashboard",
