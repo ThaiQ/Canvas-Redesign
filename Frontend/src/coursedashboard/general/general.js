@@ -31,7 +31,7 @@ const General = (props) => {
     },
     {
       text: 'People',
-      href: '/dashboard'
+      href: '/people/People'
     },
     {
       text: 'Group',
