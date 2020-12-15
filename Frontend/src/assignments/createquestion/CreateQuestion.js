@@ -51,7 +51,6 @@ export default function CreateQuestion(props) {
                         <option value="" selected disabled hidden>Select Category</option>
                         <option>Multiple Choice</option>
                         <option>Free Response</option>
-                        <option>Select All That Apply</option>
                     </Input>
                     <FormGroup>
                         <Label for="questionAnswer">Correct Answer </Label>
