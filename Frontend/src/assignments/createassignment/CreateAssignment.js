@@ -17,8 +17,9 @@ export default function CreateAssignment(props) {
     const [Points, setNumPoints] = useState('')
     const [DueDate, setDueDate] = useState('')
     const [Category, setCategory] = useState('')
+    const [Closed, setClosed] = useState('')
     async function click() {
-        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed: "Yes" });
+        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed:Closed });
         console.log(user)
         console.log(body)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
@@ -53,6 +54,12 @@ export default function CreateAssignment(props) {
                         <option>Homework</option>
                         <option>Quiz</option>
                         <option>Test</option>
+                    </Input>
+                    <Label for="closed">Closed </Label>
+                    <Input type="select" name="Closed" className="formElement dropdown" onChange={(event) => { setClosed(event.target.value) }} id="closed">
+                        <option value="" selected disabled hidden>Select Closed</option>
+                        <option>Yes</option>
+                        <option>No</option>
                     </Input>
                     <FormGroup check row>
                         <Button onClick={() => { click() }} id="submit">Submit</Button>

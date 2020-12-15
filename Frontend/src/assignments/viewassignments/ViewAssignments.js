@@ -20,7 +20,7 @@ export default function ViewAssignments(props) {
     async function getAssignments() {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
         console.log(res.data.Items)
-        let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid && elem.Category === "Assignment")
+        let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid && elem.Category === "Homework")
         setAssignments(found)
     }
     let ViewAssign = () => {

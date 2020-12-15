@@ -25,10 +25,20 @@ export default function DeleteAssignment(props) {
     }
     async function yes() {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/deleteAssignment', JSON.stringify({AssignmentID:props.match.params.assignmentid}))
-        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
+        if (Assignment.Category === "Homework") {
+            window.location.href = "/viewassignments/".concat(Assignment.CourseID.toString())
+        }
+        else {
+            window.location.href = "/viewquizzes/".concat(Assignment.CourseID.toString())
+        }
     }
     async function no() {
-        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
+        if (Assignment.Category === "Homework") {
+            window.location.href = "/viewassignments/".concat(Assignment.CourseID.toString())
+        }
+        else {
+            window.location.href = "/viewquizzes/".concat(Assignment.CourseID.toString())
+        }
     }
     let delAssign=() => {
         return (
