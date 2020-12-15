@@ -5,7 +5,7 @@ import Navbar from '../../components/left-navbar/drawer'
 const axios = require("axios")
 
 
-export default function ViewAssignment(props) {
+export default function ViewQuiz(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     const [Submission, setSubmission] = useState(null);
     const [Assignment, setAssignment] = useState(null);
@@ -39,17 +39,30 @@ export default function ViewAssignment(props) {
                             <div>
                                 {user.AccessLevel == 'Teacher' ? <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>:''}
                                 {user.AccessLevel == 'Teacher' ? <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link>:''}
+                                {user.AccessLevel == 'Teacher' ? <Link to = {`/createquestion/${Assignment.AssignmentID}`}><u>Add Question  </u>&nbsp;&nbsp;</Link>:''}
                                 <br/>
                                 Points: {Assignment.Points}
                                 <br/>
                                 {Assignment.Description}
                                 <br/>
                                 <br/>
-                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Post Submission</u></Link>
-                                :user.AccessLevel == 'Student' ? <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Resubmit Assignment </u></Link>:''}
-                                {user.AccessLevel == 'Student' && Submission ? <p> Your Submission: {Submission.Answers} </p>:''}
+                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Complete Quiz/Test</u></Link>:''}
+                                {user.AccessLevel == 'Student' && Submission ? <p> Your Attempt: {Submission.Answers} </p>:''}
                                 <br/>
                             </div> 
+                            {Assignment.Questions? Assignment.Questions.map((element, index)=>{
+                                    return (
+                                        <div className="AssignmentInstance">
+                                            <br/>
+                                            {user.AccessLevel == 'Teacher' ? <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>:''}
+                                            {user.AccessLevel == 'Teacher' ? <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u></Link>:''}
+                                            <br/>
+                                            Question {Assignment.Questions.indexOf(element) + 1}: {element.QuestionType} worth {element.Points} points.<br/>
+                                            {element.Description}
+                                            <br/>
+                                        </div> 
+                                    )
+                                }):''}
                         </div>
                     </>
                 ) : (
@@ -62,7 +75,7 @@ export default function ViewAssignment(props) {
         )
     }
     return (
-        <Navbar title='View Assignment' content={ViewAssign}> </Navbar>
+        <Navbar title='View Quiz' content={ViewQuiz}> </Navbar>
     )
 }
 

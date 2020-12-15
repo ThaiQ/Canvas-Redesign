@@ -38,7 +38,7 @@ export default function ViewQuizzes(props) {
                                     return user.AccessLevel == 'Teacher' ? (
                                         <div className="AssignmentInstance">
                                             {element.Name}: {element.Category} worth {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Quiz/Test</u>&nbsp;&nbsp;</Link>
+                                            <Link to={`/viewquiz/${element.AssignmentID}`}><u>View Quiz/Test</u>&nbsp;&nbsp;</Link>
                                             <Link to={`/editassignment/${element.AssignmentID}`}><u>Edit Quiz/Test</u>&nbsp;&nbsp;</Link>
                                             <Link to={`/viewsubmissions/${element.AssignmentID}`}><u>View Submissions</u>&nbsp;&nbsp;</Link>
                                             <Link to={`/deleteassignment/${element.AssignmentID}`}><u>Delete Quiz/Test</u>&nbsp;&nbsp;</Link>
@@ -46,7 +46,7 @@ export default function ViewQuizzes(props) {
                                     ) :
                                         (<div className="AssignmentInstance">
                                             {element.Name}: {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Quiz/Test</u></Link>
+                                            <Link to={`/viewquiz/${element.AssignmentID}`}><u>View Quiz/Test</u></Link>
                                         </div>)
                                 }) : ''}
                             </div>
