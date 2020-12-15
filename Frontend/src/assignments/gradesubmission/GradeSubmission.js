@@ -26,7 +26,7 @@ export default function GradeSubmission(props) {
         const body = Assignment
         console.log(body)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
-        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
+        window.location.href = "/viewsubmission/".concat(Assignment.AssignmentID.toString()).concat('/').concat(Submission.SubmissionID.toString())
     }
     async function getSubmission(assignid, subid) {
         let body = JSON.stringify({AssignmentID:assignid})

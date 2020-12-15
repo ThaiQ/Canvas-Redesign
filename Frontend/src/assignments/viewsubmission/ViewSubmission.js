@@ -26,6 +26,7 @@ export default function ViewSubmission(props) {
     }
     let ViewSub=() => {
         return (
+            
             <div className="App"> 
             <header className="new-header">
                 { Submission ? (
@@ -37,7 +38,12 @@ export default function ViewSubmission(props) {
                             <div>
                                 Grade: {Submission.Grade}
                                 <br/>
-                                Submission Body: {Submission.Answers}
+                                    Submission Body:<br/> {Assignment.Category === "Assignment"? (Submission.Answers):(
+                                    Submission ? Submission.Answers.map((element, index) => {
+                                        return (
+                                            <u>Question {index + 1}: {element}<br/></u>
+                                        )
+                                    }) : '')}
                                 <br/>
                                 {user.AccessLevel == 'Teacher' ? <Link to = {`/gradesubmission/${Submission.AssignmentID}/${Submission.SubmissionID}`}><u>Grade Submission</u>&nbsp;&nbsp;</Link>:''}
                                 {user.AccessLevel == 'Student' ? <Link to = {`/submitassignment/${Submission.AssignmentID}`}><u>Resubmit</u>&nbsp;&nbsp;</Link>:''}
