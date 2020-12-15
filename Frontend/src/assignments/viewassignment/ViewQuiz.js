@@ -10,7 +10,6 @@ export default function ViewQuiz(props) {
     const [Submission, setSubmission] = useState(null);
     const [Assignment, setAssignment] = useState(null);
     useEffect(()=>{
-        const params = props.match.params
         checkLogin(user) //redirect user to homepage if not login
         getAssignment()
         console.log(user)
@@ -26,7 +25,7 @@ export default function ViewQuiz(props) {
             }
         }
     }
-    let ViewAssign=() => {
+    let ViewQuiz=() => {
         return (
             <div className="App"> {console.log(Submission)}
             <header className="new-header">
@@ -46,7 +45,7 @@ export default function ViewQuiz(props) {
                                 {Assignment.Description}
                                 <br/>
                                 <br/>
-                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Complete Quiz/Test</u></Link>:''}
+                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitquiz/${Assignment.AssignmentID}`}><u>Complete Quiz/Test</u></Link>:''}
                                 {user.AccessLevel == 'Student' && Submission ? <p> Your Attempt: {Submission.Answers} </p>:''}
                                 <br/>
                             </div> 

@@ -30,7 +30,7 @@ export default function ViewQuizzes(props) {
                     {Assignments ? (
                         <>
                             <h1 id="title">
-                                All Assignments
+                                All Quizzes and Tests
                             </h1>
                             <div className="AssignmentDisplay">
                                 {user.AccessLevel == 'Teacher' ? <Link to={`/createassignment/${props.match.params.courseid}`}><u>Create Assignment</u>&nbsp;&nbsp;</Link>:''}
