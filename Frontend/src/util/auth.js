@@ -10,4 +10,15 @@ function checkTeacher (user) {
     else window.location.href = '/'
 }
 
-module.exports = {checkLogin,clientId,checkTeacher} 
+async function changeAccess (user) {
+    const axios = require('axios')
+    let body = {
+        ...user,
+        AccessLevel: user.AccessLevel=='Teacher'? 'Student' : 'Teacher'
+    }
+    await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/user", JSON.stringify(body))
+    localStorage.setItem('user', JSON.stringify(body));
+    window.location.reload(true)
+}
+
+module.exports = {checkLogin,clientId,checkTeacher,changeAccess} 

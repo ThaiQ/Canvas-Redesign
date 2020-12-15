@@ -69,3 +69,12 @@ body {
 .drawer-link {
     text-decoration: none !important;
 }
+
+#view-reload-icon-div{
+    display: inline;
+}
+
+#view-reload-icon-div:hover{
+    cursor: pointer;
+    background-color: rgba(240, 248, 255, 0.356);
+}
