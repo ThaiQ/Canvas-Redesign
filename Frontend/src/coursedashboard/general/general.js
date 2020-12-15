@@ -22,7 +22,7 @@ const General = (props) => {
     },
     {
       text: 'Quizzes/Tests',
-      href: '/dashboard'
+      href: `/viewquizzes/${props.courseID}`
     },
     {
       text: 'Grade',
