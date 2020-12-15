@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin } from '../util/auth'
+import { checkLogin } from '../../util/auth'
 import './ViewAssignments.css';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/left-navbar/drawer'
+import Navbar from '../../components/left-navbar/drawer'
 const axios = require("axios")
 
 

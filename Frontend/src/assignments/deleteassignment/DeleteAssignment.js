@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin, checkTeacher } from '../util/auth'
-import './ViewAssignments.css';
+import { checkLogin, checkTeacher } from '../../util/auth'
 import { Link } from 'react-router-dom';
-import Navbar from '../components/left-navbar/drawer'
+import Navbar from '../../components/left-navbar/drawer'
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 const axios = require("axios")
 

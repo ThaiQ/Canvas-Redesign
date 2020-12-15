@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin } from '../util/auth'
-import './EditAssignment.css';
+import { checkLogin } from '../../util/auth'
 import { Button, FormGroup, Label, Input } from 'reactstrap';
-import Navbar from '../components/left-navbar/drawer'
 const axios = require("axios")
 const crypto = require('crypto');
 

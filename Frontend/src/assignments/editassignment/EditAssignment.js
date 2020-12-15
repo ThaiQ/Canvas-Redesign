@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin, checkTeacher } from '../util/auth'
+import { checkLogin, checkTeacher } from '../../util/auth'
 import './EditAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
-import Navbar from '../components/left-navbar/drawer'
 const axios = require("axios")
 
 export default function EditAssignment(props) {

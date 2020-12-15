@@ -13,3 +13,6 @@
     color: #dfd9d9 !important;
   }
   
+  body,p,h1,h2,h3,div{
+    color: white;
+  }
