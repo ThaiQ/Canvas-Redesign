@@ -34,6 +34,7 @@ export default function ViewAssignments(props) {
                                 All Assignments
                             </h1>
                             <div className="AssignmentDisplay">
+                                {user.AccessLevel == 'Teacher' ? <Link to={`/createassignment/${props.match.params.courseid}`}><u>Create Assignment</u>&nbsp;&nbsp;</Link>:''}
                                 {Assignments ? Assignments.map((element, index) => {
                                     return user.AccessLevel == 'Teacher' ? (
                                         <div className="AssignmentInstance">
@@ -46,8 +47,7 @@ export default function ViewAssignments(props) {
                                     ) :
                                         (<div className="AssignmentInstance">
                                             {element.Name}: {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u>&nbsp;&nbsp;</Link>
-                                            <Link to={`/submitassignment/${element.AssignmentID}`}><u>Post Submission</u>&nbsp;&nbsp;</Link>
+                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u></Link>
                                         </div>)
                                 }) : ''}
                             </div>

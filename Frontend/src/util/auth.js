@@ -5,4 +5,9 @@ function checkLogin (user) {
     else window.location.href = '/'
 }
 
-module.exports = {checkLogin,clientId} 
+function checkTeacher (user) {
+    if (user.AccessLevel === "Teacher") return true
+    else window.location.href = '/'
+}
+
+module.exports = {checkLogin,clientId,checkTeacher} 

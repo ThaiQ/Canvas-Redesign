@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin } from '../../util/auth'
+import { checkLogin, checkTeacher } from '../../util/auth'
 import './CreateAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 const axios = require("axios")
@@ -8,6 +8,7 @@ export default function CreateAssignment(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     useEffect(() => {
         checkLogin(user) //redirect user to homepage if not login
+        checkTeacher(user)
         console.log(user)
     }, [])
     const params = props.match.params

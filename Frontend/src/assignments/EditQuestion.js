@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin }  from '../util/auth'
+import { checkLogin, checkTeacher } from '../util/auth'
 import './ViewAssignments.css';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/left-navbar/drawer'
@@ -20,6 +20,7 @@ export default function EditQuestion(props) {
         let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
         setUser(user)
         checkLogin(user) //redirect user to homepage if not login
+        checkTeacher(user)
         getAssignment()
         console.log(user)
     },[])

@@ -32,7 +32,7 @@ export default function SubmitAssignment(props) {
         console.log(Assignment)
         let body = Assignment
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
-        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
+        window.location.href = "/viewassignment/".concat(Assignment.AssignmentID)
     }
     async function getAssignment(id) {
         setStudentID(user.StudentID.toString())

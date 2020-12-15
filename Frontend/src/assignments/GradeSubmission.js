@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin } from '../util/auth'
+import { checkLogin, checkTeacher } from '../util/auth'
 import './EditAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import Navbar from '../components/left-navbar/drawer'
@@ -13,6 +13,7 @@ export default function GradeSubmission(props) {
     const [Grade, setGrade] = useState(null)
     useEffect(() => {
         checkLogin(user) //redirect user to homepage if not login
+        checkTeacher(user)
         const params = props.match.params
         getSubmission(params.assignmentid, params.submissionid)
     }, [])

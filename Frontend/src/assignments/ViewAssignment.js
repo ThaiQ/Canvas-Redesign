@@ -7,13 +7,11 @@ const axios = require("axios")
 
 
 export default function ViewAssignment(props) {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     const [Submission, setSubmission] = useState(null);
     const [Assignment, setAssignment] = useState(null);
     useEffect(()=>{
         const params = props.match.params
-        let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-        setUser(user)
         checkLogin(user) //redirect user to homepage if not login
         getAssignment()
         console.log(user)
@@ -22,15 +20,16 @@ export default function ViewAssignment(props) {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
         let found = await res.data.Items.filter(elem => elem.AssignmentID === props.match.params.assignmentid)
         setAssignment(found[0])
+        console.log(found[0].Submissions.filter(elem => elem.StudentID === user.StudentID.toString())[0])
         if (found[0]) {
-            let sub = found[0].Submissions.filter(elem => elem.SubmissionID === props.match.params.submissionid)[0]
-            setSubmission(sub);
+            if (found[0].Submissions.filter(elem => elem.StudentID === user.StudentID.toString())[0]) {
+                setSubmission(found[0].Submissions.filter(elem => elem.StudentID === user.StudentID.toString())[0]);
+            }
         }
-        console.log(found[0])
     }
     let ViewAssign=() => {
         return (
-            <div className="App"> 
+            <div className="App"> {console.log(Submission)}
             <header className="new-header">
                 { Assignment ? (
                     <>
@@ -39,22 +38,26 @@ export default function ViewAssignment(props) {
                         </h1>
                         <div className="AssignmentDisplay">
                             <div>
-                                <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>
-                                <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link>
-                                <Link to = {`/createquestion/${Assignment.AssignmentID}`}><u>Add Question  </u>&nbsp;&nbsp;</Link> 
-                                <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Post Submission  </u>&nbsp;&nbsp;</Link>
+                                {user.AccessLevel == 'Teacher' ? <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>:''}
+                                {user.AccessLevel == 'Teacher' ? <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link>:''}
+                                {user.AccessLevel == 'Teacher' ? <Link to = {`/createquestion/${Assignment.AssignmentID}`}><u>Add Question  </u>&nbsp;&nbsp;</Link>:''}
                                 <br/>
                                 Points: {Assignment.Points}
                                 <br/>
-                                Assignment Description: {Assignment.Description}
+                                {Assignment.Description}
+                                <br/>
+                                <br/>
+                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Post Submission</u></Link>
+                                :user.AccessLevel == 'Student' ? <Link to = {`/submitassignment/${Assignment.AssignmentID}`}><u>Resubmit Assignment </u></Link>:''}
+                                {user.AccessLevel == 'Student' && Submission ? <p> Your Submission: {Submission.Answers} </p>:''}
                                 <br/>
                             </div> 
                             {Assignment.Questions? Assignment.Questions.map((element, index)=>{
                                     return (
                                         <div className="AssignmentInstance">
                                             <br/>
-                                            <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>
-                                            <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u>&nbsp;&nbsp;</Link>
+                                            {user.AccessLevel == 'Teacher' ? <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>:''}
+                                            {user.AccessLevel == 'Teacher' ? <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u></Link>:''}
                                             <br/>
                                             Question {Assignment.Questions.indexOf(element) + 1}: {element.QuestionType} worth {element.Points} points.<br/>
                                             {element.Description}
@@ -74,7 +77,7 @@ export default function ViewAssignment(props) {
         )
     }
     return (
-        <Navbar title='View Submission' content={ViewAssign}> </Navbar>
+        <Navbar title='View Assignment' content={ViewAssign}> </Navbar>
     )
 }
 
