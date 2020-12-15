@@ -43,10 +43,10 @@ export default function DeleteQuestion(props) {
         }
         let body = Assignment
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment', JSON.stringify(body))
-        window.location.href = "/viewassignment/".concat(props.match.params.assignmentid.toString())
+        window.location.href = "/viewquiz/".concat(props.match.params.assignmentid.toString())
     }
     async function no() {
-        window.location.href = "/viewassignment/".concat(props.match.params.assignmentid.toString())
+        window.location.href = "/viewquiz/".concat(props.match.params.assignmentid.toString())
     }
     let delAssign=() => {
         return (

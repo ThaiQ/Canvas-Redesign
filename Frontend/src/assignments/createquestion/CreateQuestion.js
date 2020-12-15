@@ -25,7 +25,7 @@ export default function CreateQuestion(props) {
         }
         let body = Assignment
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", JSON.stringify(body))
-        window.location.href = "/viewAssignment/".concat(Assignment.AssignmentID.toString())
+        window.location.href = "/viewquiz/".concat(Assignment.AssignmentID.toString())
     }
     async function getAssignment(id) {
         let body = JSON.stringify({AssignmentID:id})

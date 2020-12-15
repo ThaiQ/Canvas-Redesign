@@ -39,22 +39,20 @@ export default function ViewQuiz(props) {
                                 {user.AccessLevel == 'Teacher' ? <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>:''}
                                 {user.AccessLevel == 'Teacher' ? <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link>:''}
                                 {user.AccessLevel == 'Teacher' ? <Link to = {`/createquestion/${Assignment.AssignmentID}`}><u>Add Question  </u>&nbsp;&nbsp;</Link>:''}
+                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitquiz/${Assignment.AssignmentID}`}><u>Complete Quiz/Test</u></Link>:''}
+                                {user.AccessLevel == 'Student' && Submission ? <p> Awaiting Grade </p>:''}
                                 <br/>
                                 Points: {Assignment.Points}
                                 <br/>
                                 {Assignment.Description}
                                 <br/>
-                                <br/>
-                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitquiz/${Assignment.AssignmentID}`}><u>Complete Quiz/Test</u></Link>:''}
-                                {user.AccessLevel == 'Student' && Submission ? <p> Your Attempt: {Submission.Answers} </p>:''}
-                                <br/>
                             </div> 
-                            {Assignment.Questions? Assignment.Questions.map((element, index)=>{
+                            {user.AccessLevel == 'Teacher' && Assignment.Questions? Assignment.Questions.map((element, index)=>{
                                     return (
                                         <div className="AssignmentInstance">
                                             <br/>
-                                            {user.AccessLevel == 'Teacher' ? <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>:''}
-                                            {user.AccessLevel == 'Teacher' ? <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u></Link>:''}
+                                                <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>
+                                                <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u></Link>
                                             <br/>
                                             Question {Assignment.Questions.indexOf(element) + 1}: {element.QuestionType} worth {element.Points} points.<br/>
                                             {element.Description}
