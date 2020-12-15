@@ -10,6 +10,7 @@ import CreateAssignment from './assignments/createassignment/createdashboard'
 import CreateQuestion from './assignments/createquestion/createdashboard'
 import ViewAssignments from './assignments/viewassignments/ViewAssignments'
 import ViewAssignment from './assignments/viewassignment/ViewAssignment'
+import ViewQuizzes from './assignments/viewassignments/ViewQuizzes'
 import EditAssignment from './assignments/editassignment/createdashboard'
 import EditQuestion from './assignments/editquestion/createdashboard'
 import SubmitAssignment from './assignments/submitassignment/createdashboard'
@@ -41,6 +42,10 @@ let routes = [
   {
     path: "/viewassignments/:courseid",
     component: ViewAssignments
+  },
+  {
+    path: "/viewquizzes/:courseid",
+    component: ViewQuizzes
   },
   {
     path: "/viewassignment/:assignmentid",

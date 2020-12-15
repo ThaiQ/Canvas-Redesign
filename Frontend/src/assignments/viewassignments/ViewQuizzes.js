@@ -6,7 +6,7 @@ import Navbar from '../../components/left-navbar/drawer'
 const axios = require("axios")
 
 
-export default function ViewAssignments(props) {
+export default function ViewQuizzes(props) {
     const [user, setUser] = useState(null);
     const [Assignments, setAssignments] = useState(null);
     useEffect(() => {
@@ -20,10 +20,10 @@ export default function ViewAssignments(props) {
     async function getAssignments() {
         let res = await axios.post('https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/getAssignment', JSON.stringify({}))
         console.log(res.data.Items)
-        let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid && elem.Category === "Assignment")
+        let found = await res.data.Items.filter(elem => elem.CourseID === props.match.params.courseid && (elem.Category === "Test" || elem.Category === "Quiz"))
         setAssignments(found)
     }
-    let ViewAssign = () => {
+    let ViewQuiz = () => {
         return (
             <div className="App">
                 <header className="new-header">
@@ -38,15 +38,15 @@ export default function ViewAssignments(props) {
                                     return user.AccessLevel == 'Teacher' ? (
                                         <div className="AssignmentInstance">
                                             {element.Name}: {element.Category} worth {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u>&nbsp;&nbsp;</Link>
-                                            <Link to={`/editassignment/${element.AssignmentID}`}><u>Edit Assignment</u>&nbsp;&nbsp;</Link>
+                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Quiz/Test</u>&nbsp;&nbsp;</Link>
+                                            <Link to={`/editassignment/${element.AssignmentID}`}><u>Edit Quiz/Test</u>&nbsp;&nbsp;</Link>
                                             <Link to={`/viewsubmissions/${element.AssignmentID}`}><u>View Submissions</u>&nbsp;&nbsp;</Link>
-                                            <Link to={`/deleteassignment/${element.AssignmentID}`}><u>Delete Assignment</u>&nbsp;&nbsp;</Link>
+                                            <Link to={`/deleteassignment/${element.AssignmentID}`}><u>Delete Quiz/Test</u>&nbsp;&nbsp;</Link>
                                         </div>
                                     ) :
                                         (<div className="AssignmentInstance">
                                             {element.Name}: {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u></Link>
+                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Quiz/Test</u></Link>
                                         </div>)
                                 }) : ''}
                             </div>
@@ -61,7 +61,7 @@ export default function ViewAssignments(props) {
         )
     }
     return (
-        <Navbar title='View Assignments' content={ViewAssign}> </Navbar>
+        <Navbar title='View Quizzes and Tests' content={ViewQuiz}> </Navbar>
     )
 }
 
