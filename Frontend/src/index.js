@@ -22,7 +22,7 @@ import DeleteQuestion from './assignments/DeleteQuestion'
 
 import Dashboard from './dashboard/dashboard'
 import CourseBoard from './coursedashboard/dashboard'
-import People from './people/people'
+import People from './people/People'
 
 
 // Add new routing path to new pages in here
