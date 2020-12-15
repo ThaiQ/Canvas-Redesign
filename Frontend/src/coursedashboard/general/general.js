@@ -10,7 +10,6 @@ const General = (props) => {
   useEffect(() => { }, [todo])
 
   const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
-  console.log(JSON.parse(localStorage.getItem('user')))
 
   let items = [
     {
@@ -19,7 +18,7 @@ const General = (props) => {
     },
     {
       text: 'Assignments',
-      href: '/assignments'
+      href: `/viewassignments/${props.courseID}`
     },
     {
       text: 'Quizzes/Tests',
@@ -40,9 +39,9 @@ const General = (props) => {
   ]
 
   return (
-    <ListGroup id='dashb-general'>
+    <ListGroup id='dashb-general'> 
       {props.items? props.items.map((item, ind) => {
-        return <Link to={item.href} className='dash-general-ani'>
+        return <Link to={item.href} className='dash-general-ani' key={ind}>
           <ListGroupItem key={ind} className="justify-content-between">{item.text} <Badge pill>{item.count == 0 ? 0 : item.count}</Badge></ListGroupItem>
         </Link>
       })

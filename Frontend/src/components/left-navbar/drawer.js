@@ -209,7 +209,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.content ? <props.content user={props.user} /> : ''}
+        {props.content ? <props.content user={props.user} {...props}/> : ''}
       </main>
     </div>
   );

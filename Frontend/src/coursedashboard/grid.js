@@ -27,7 +27,6 @@ export default function NestedGrid(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     useEffect(() => {
         checkLogin(user) //redirect user to homepage if not login
-        console.log(user)
     }, [])
 
     const [panel, setPanel] = useState(true)
@@ -62,7 +61,7 @@ export default function NestedGrid(props) {
                         </div>
 
                     {
-                        panel? <General style={panelStyle}></General> : <Todo style={panelStyle}></Todo>
+                        panel? <General style={panelStyle} courseID={props.courseID}></General> : <Todo style={panelStyle}></Todo>
                     }
                 </Grid>
             </Grid>
