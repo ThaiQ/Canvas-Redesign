@@ -72,7 +72,7 @@ export default function ViewAssignment(props) {
                                     </div>:''}
                                 <br/>
                                 <div className="assignmentDetails">
-                                    Points: {Assignment.Points}
+                                    Points: {Submission ? <u>{Submission.Grade}/</u>:''}{Assignment.Points}
                                     <br/>
                                     {Assignment.Description}
                                 </div>

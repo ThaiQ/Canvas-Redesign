@@ -47,12 +47,12 @@ export default function ViewSubmission(props) {
                             <div className="assignmentDetails">
                                 Grade: {Submission.Grade}
                                 <br/>
-                                    Submission Body:<br/> {Assignment.Category === "Assignment"? (Submission.Answers):(
+                                    Submission Body:<br/> {Assignment.Category != "Assignment"? (Submission.Answers):(
                                     Submission ? Submission.Answers.map((element, index) => {
                                         return (
                                             <u>Question {index + 1}: {element}<br/></u>
                                         )
-                                    }) : '')}
+                                    }) : <u>{Submission.Answers}</u>)}
                                 <br/>
                                 {user.AccessLevel == 'Teacher' ? <div className="buttondivmed">
                                                 <Link to = {`/gradesubmission/${Submission.AssignmentID}/${Submission.SubmissionID}`} className='drawer-link'>

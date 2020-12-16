@@ -94,7 +94,7 @@ export default function ViewQuiz(props) {
                                     </Link>
                                 </div>:''}
                                 <div className="assignmentDetails">
-                                {user.AccessLevel == 'Student' && Submission ? <p> Awaiting Grade </p>:''}
+                                {user.AccessLevel == 'Student' && Submission ? <p> Grade: {Submission.Grade}/{Assignment.Points} </p>:''}
                                 <br/>
                                 </div>
                             </div> 
