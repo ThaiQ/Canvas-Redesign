@@ -20,7 +20,7 @@ class Peo extends Component {
             3: {
                 username: 'Marry Benoth',
                 email: 'marry.benoth@sjsu.edu',
-                role: 'Teacher',
+                role: 'Student',
             },
             4: {
                 username: 'Jony Beckar',
@@ -28,6 +28,11 @@ class Peo extends Component {
                 role: 'T.A'
             },
             5: {
+                username: 'Thai Quach',
+                email: 'thai.quach@sjsu.edu',
+                role: 'Teacher'
+            },
+            6: {
                 username: 'Jonh Mathe',
                 email: 'jonh.mathe@sjsu.edu',
                 role: 'Student'
@@ -90,11 +95,11 @@ class Peo extends Component {
                 <Modal isOpen={this.state.addModal} toggle={this.toggleAddModal} style={{marginTop:'100px'}}>
                     <AvForm onValidSubmit={this.add} style={{backgroundColor:'rgb(35, 48, 68)', color:'white'}}>
                         <ModalHeader toggle={this.toggleAddModal}>
-                            Add a new Student
+                            Add a Person
                         </ModalHeader>
                             <ModalBody>
                                 <AvField label="Name" name="username" required />
-                                <AvField label="email" name="email" required />
+                                <AvField label="email" name="email" type="email" required />
                                 <AvField label="Role" name="role" required />
                         </ModalBody>
                         <ModalFooter>

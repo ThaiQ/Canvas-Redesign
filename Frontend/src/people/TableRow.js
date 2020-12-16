@@ -16,7 +16,7 @@ class Peo extends Component {
   }
   render() {
     return (
-        <tr>
+        <tr>  
         <td>
           {this.state.editing
             ? <AvForm onValidSubmit={this.save}>
