@@ -12,7 +12,9 @@
   ::placeholder {
     color: #dfd9d9 !important;
   }
-  
+  .App-header {
+    background-color: #1b2635 !important;
+  }
   body,p,h1,h2,h3,div{
     color: white;
   }

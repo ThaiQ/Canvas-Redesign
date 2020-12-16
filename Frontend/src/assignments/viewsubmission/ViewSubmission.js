@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin }  from '../../util/auth'
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/left-navbar/drawer'
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import SearchIcon from '@material-ui/icons/Search';
+import EditIcon from '@material-ui/icons/Edit';
+import GradeIcon from '@material-ui/icons/Grade';
+import DeleteIcon from '@material-ui/icons/Delete';
+import PublishIcon from '@material-ui/icons/Publish';
 const axios = require("axios")
 
 
@@ -35,7 +44,7 @@ export default function ViewSubmission(props) {
                         Submission By {Submission.StudentID} for {Assignment.Name}:
                         </h1>
                         <div className="AssignmentDisplay">
-                            <div>
+                            <div className="assignmentDetails">
                                 Grade: {Submission.Grade}
                                 <br/>
                                     Submission Body:<br/> {Assignment.Category === "Assignment"? (Submission.Answers):(
@@ -45,8 +54,22 @@ export default function ViewSubmission(props) {
                                         )
                                     }) : '')}
                                 <br/>
-                                {user.AccessLevel == 'Teacher' ? <Link to = {`/gradesubmission/${Submission.AssignmentID}/${Submission.SubmissionID}`}><u>Grade Submission</u>&nbsp;&nbsp;</Link>:''}
-                                {user.AccessLevel == 'Student' ? <Link to = {`/submitassignment/${Submission.AssignmentID}`}><u>Resubmit</u>&nbsp;&nbsp;</Link>:''}
+                                {user.AccessLevel == 'Teacher' ? <div className="buttondivmed">
+                                                <Link to = {`/gradesubmission/${Submission.AssignmentID}/${Submission.SubmissionID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><GradeIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Grade Submission'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>:''}
+                                {user.AccessLevel == 'Student' ? <div className="buttondivsmall">
+                                                <Link to = {`/submitassignment/${Submission.AssignmentID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><PublishIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Resubmit'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>:''}
                             </div> 
                         </div>
                     </>

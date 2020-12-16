@@ -6,7 +6,7 @@ const crypto = require('crypto');
 
 export default function SubmitAssignment(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
-    const [Answers, setAnswers] = useState([])
+    const [Answers, setAnswers] = useState('')
     const [Assignment, setAssignment] = useState('')
     const [StudentID, setStudentID] = useState('')
     useEffect(() => {
@@ -49,6 +49,7 @@ export default function SubmitAssignment(props) {
                     <div className="Form">
                         <FormGroup>
                             <Label for="assignmentAnswers">Enter Submission Here</Label>
+                            <Input type="textarea" name="ans" className="formElement" onChange={(event) => { setAnswers(event.target.value) }} id="ans" placeholder="Submission" />
                         </FormGroup>
                         <FormGroup check row>
                             <Button onClick={() => { click() }} id="submit">Submit</Button>

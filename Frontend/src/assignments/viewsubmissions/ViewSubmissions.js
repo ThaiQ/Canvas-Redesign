@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin, checkTeacher } from '../../util/auth'
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/left-navbar/drawer'
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import SearchIcon from '@material-ui/icons/Search';
+import EditIcon from '@material-ui/icons/Edit';
+import GradeIcon from '@material-ui/icons/Grade';
+import DeleteIcon from '@material-ui/icons/Delete';
 const axios = require("axios")
+
 
 
 export default function ViewSubmissions(props) {
@@ -35,7 +44,24 @@ export default function ViewSubmissions(props) {
                             {Submissions? Submissions.map((element, index)=>{
                                 return (
                                     <div className="AssignmentInstance">
-                                        Submission by ID {element.StudentID} Grade: {element.Grade}/{Assignment.Points} <Link to = {`/viewsubmission/${Assignment.AssignmentID}/${element.SubmissionID}`}><u>View Submission</u></Link> <Link to = {`/gradesubmission/${element.AssignmentID}/${element.SubmissionID}`}><u>Grade</u></Link>
+                                        <div className="assignmentDetails">
+                                            Submission by ID {element.StudentID} Grade: {element.Grade}/{Assignment.Points} 
+                                        </div>
+                                            <div className="buttondivmed">
+                                                <Link to = {`/viewsubmission/${Assignment.AssignmentID}/${element.SubmissionID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><SearchIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'View Submission'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div><div className="buttondivsmall">
+                                                <Link to = {`/gradesubmission/${element.AssignmentID}/${element.SubmissionID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><GradeIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Grade'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
                                     </div> 
                                 )
                             }):''}

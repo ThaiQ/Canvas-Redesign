@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin }  from '../../util/auth'
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/left-navbar/drawer'
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import SearchIcon from '@material-ui/icons/Search';
+import EditIcon from '@material-ui/icons/Edit';
+import GradeIcon from '@material-ui/icons/Grade';
+import DeleteIcon from '@material-ui/icons/Delete';
+import PublishIcon from '@material-ui/icons/Publish';
 const axios = require("axios")
 
 
@@ -36,26 +45,84 @@ export default function ViewQuiz(props) {
                         </h1>
                         <div className="AssignmentDisplay">
                             <div>
-                                {user.AccessLevel == 'Teacher' ? <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`}><u>Grade Submissions</u>&nbsp;&nbsp;</Link>:''}
-                                {user.AccessLevel == 'Teacher' ? <Link to = {`/editassignment/${Assignment.AssignmentID}`}><u>Edit Assignment  </u>&nbsp;&nbsp;</Link>:''}
-                                {user.AccessLevel == 'Teacher' ? <Link to = {`/createquestion/${Assignment.AssignmentID}`}><u>Add Question  </u>&nbsp;&nbsp;</Link>:''}
-                                {user.AccessLevel == 'Student' && !Submission ? <Link to = {`/submitquiz/${Assignment.AssignmentID}`}><u>Complete Quiz/Test</u></Link>:''}
+                                {user.AccessLevel == 'Teacher' ? <div className="buttondivsmall">
+                                    <Link to = {`/viewsubmissions/${Assignment.AssignmentID}`} className='drawer-link'>
+                                        <ListItem className='dashb-text' button>
+                                            <ListItemIcon><GradeIcon /> </ListItemIcon>
+                                            <ListItemText primary={'Grade'} />
+                                        </ListItem>
+                                    </Link>
+                                </div>:''}
+                                {user.AccessLevel == 'Teacher' ? <div className="buttondivsmall">
+                                    <Link to = {`/editassignment/${Assignment.AssignmentID}`} className='drawer-link'>
+                                        <ListItem className='dashb-text' button>
+                                            <ListItemIcon><EditIcon /> </ListItemIcon>
+                                            <ListItemText primary={'Edit'} />
+                                        </ListItem>
+                                    </Link>
+                                </div>:''}
+                                {user.AccessLevel == 'Teacher' ? <div className="buttondivmed">
+                                    <Link to = {`/createquestion/${Assignment.AssignmentID}`} className='drawer-link'>
+                                        <ListItem className='dashb-text' button>
+                                            <ListItemIcon><AddBoxIcon /> </ListItemIcon>
+                                            <ListItemText primary={'Add Question'} />
+                                        </ListItem>
+                                    </Link>
+                                </div>:''}
+                                {user.AccessLevel == 'Teacher' ? 
+                                    <div className="buttondivsmall">
+                                        <Link to={`/deleteassignment/${Assignment.AssignmentID}`} className='drawer-link'>
+                                            <ListItem className='dashb-text' button>
+                                                <ListItemIcon><DeleteIcon /> </ListItemIcon>
+                                                <ListItemText primary={'Delete'} />
+                                            </ListItem>
+                                        </Link>
+                                    </div>:''}
+                                <br/>
+                                <div className="assignmentDetails">
+                                    Points: {Assignment.Points}
+                                    <br/>
+                                    {Assignment.Description}
+                                    <br/>
+                                </div>
+                                {user.AccessLevel == 'Student' && !Submission ? <div className="buttondivsmall">
+                                    <Link to = {`/submitquiz/${Assignment.AssignmentID}`} className='drawer-link'>
+                                        <ListItem className='dashb-text' button>
+                                            <ListItemIcon><EditIcon /> </ListItemIcon>
+                                            <ListItemText primary={'Complete'} />
+                                        </ListItem>
+                                    </Link>
+                                </div>:''}
+                                <div className="assignmentDetails">
                                 {user.AccessLevel == 'Student' && Submission ? <p> Awaiting Grade </p>:''}
                                 <br/>
-                                Points: {Assignment.Points}
-                                <br/>
-                                {Assignment.Description}
-                                <br/>
+                                </div>
                             </div> 
                             {user.AccessLevel == 'Teacher' && Assignment.Questions? Assignment.Questions.map((element, index)=>{
                                     return (
                                         <div className="AssignmentInstance">
                                             <br/>
-                                                <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`}><u>Edit Question</u>&nbsp;&nbsp;</Link>
-                                                <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`}><u>Delete Question</u></Link>
+                                            <div className="buttondivsmall">
+                                                <Link to = {`/editquestion/${element.AssignmentID}/${element.QuestionID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><EditIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Edit'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
+                                            <div className="buttondivsmall">
+                                                <Link to = {`/deletequestion/${element.AssignmentID}/${element.QuestionID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><DeleteIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Delete'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
                                             <br/>
+                                            <div className="assignmentDetails">
                                             Question {Assignment.Questions.indexOf(element) + 1}: {element.QuestionType} worth {element.Points} points.<br/>
                                             {element.Description}
+                                            </div>
                                             <br/>
                                         </div> 
                                     )

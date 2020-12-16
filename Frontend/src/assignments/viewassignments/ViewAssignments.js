@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { checkLogin } from '../../util/auth'
 import './ViewAssignments.css';
 import { Link } from 'react-router-dom';
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import SearchIcon from '@material-ui/icons/Search';
+import EditIcon from '@material-ui/icons/Edit';
+import GradeIcon from '@material-ui/icons/Grade';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Navbar from '../../components/left-navbar/drawer'
 const axios = require("axios")
 
@@ -33,20 +41,68 @@ export default function ViewAssignments(props) {
                                 All Assignments
                             </h1>
                             <div className="AssignmentDisplay">
-                                {user.AccessLevel == 'Teacher' ? <Link to={`/createassignment/${props.match.params.courseid}`}><u>Create Assignment</u>&nbsp;&nbsp;</Link>:''}
+                                {user.AccessLevel == 'Teacher' ? <div className="buttondiv">
+                                    <Link to={`/createassignment/${props.match.params.courseid}`} className='drawer-link'>
+                                        <ListItem className='dashb-text' button>
+                                            <ListItemIcon><AddBoxIcon /> </ListItemIcon>
+                                            <ListItemText primary={'Create Assignment'} />
+                                        </ListItem>
+                                    </Link>
+                                </div>:''}
                                 {Assignments ? Assignments.map((element, index) => {
                                     return user.AccessLevel == 'Teacher' ? (
                                         <div className="AssignmentInstance">
-                                            {element.Name}: {element.Category} worth {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u>&nbsp;&nbsp;</Link>
-                                            <Link to={`/editassignment/${element.AssignmentID}`}><u>Edit Assignment</u>&nbsp;&nbsp;</Link>
-                                            <Link to={`/viewsubmissions/${element.AssignmentID}`}><u>View Submissions</u>&nbsp;&nbsp;</Link>
-                                            <Link to={`/deleteassignment/${element.AssignmentID}`}><u>Delete Assignment</u>&nbsp;&nbsp;</Link>
+                                            <br />
+                                            <br />
+                                            <div className="assignmentDetails">
+                                                {element.Name}: {element.Category} worth {element.Points} points, due on {element.DueDate}.<br />
+                                            </div>
+                                            <div className="buttondivsmall">
+                                                <Link to={`/viewassignment/${element.AssignmentID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><SearchIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'View'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
+                                            <div className="buttondivsmall">
+                                                <Link to={`/editassignment/${element.AssignmentID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><EditIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Edit'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
+                                            <div className="buttondivsmall">
+                                                <Link to={`/viewsubmissions/${element.AssignmentID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><GradeIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Grade'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
+                                            <div className="buttondivsmall">
+                                                <Link to={`/deleteassignment/${element.AssignmentID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><DeleteIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'Delete'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
                                         </div>
                                     ) :
                                         (<div className="AssignmentInstance">
-                                            {element.Name}: {element.Points} points, due on {element.DueDate}.<br />
-                                            <Link to={`/viewassignment/${element.AssignmentID}`}><u>View Assignment</u></Link>
+                                            <div className="assignmentDetails">
+                                                {element.Name}: {element.Category} worth {element.Points} points, due on {element.DueDate}.<br />
+                                            </div>
+                                            <div className="buttondivsmall">
+                                                <Link to={`/viewassignment/${element.AssignmentID}`} className='drawer-link'>
+                                                    <ListItem className='dashb-text' button>
+                                                        <ListItemIcon><SearchIcon /> </ListItemIcon>
+                                                        <ListItemText primary={'View'} />
+                                                    </ListItem>
+                                                </Link>
+                                            </div>
                                         </div>)
                                 }) : ''}
                             </div>

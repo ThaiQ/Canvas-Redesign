@@ -39,7 +39,7 @@ export default function GradeSubmission(props) {
             <header className="create-header">
                 <div className="Form">
                     <FormGroup>
-                        <Label for="numPoints">Enter Grade</Label>
+                        <Label for="numPoints">Enter Submission Grade</Label>
                         <Input type="number" name="points" className="formElement" onChange={(event) => { setGrade(event.target.value) }} id="numPoints" placeholder="Grade" />
                     </FormGroup>
                     <FormGroup check row>
