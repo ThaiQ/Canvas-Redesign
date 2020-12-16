@@ -43,7 +43,7 @@ export default function EditQuestion(props) {
         console.log(Assignment.Questions)
         let body = JSON.stringify(Assignment)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
-        window.location.href = "/viewAssignment/".concat(Assignment.AssignmentID.toString())
+        window.location.href = "/viewquiz/".concat(Assignment.AssignmentID.toString())
     }
     //let editQuestion=() => {
         return (
