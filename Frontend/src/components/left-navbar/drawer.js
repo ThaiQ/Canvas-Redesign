@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,6 +24,8 @@ import HelpIcon from '@material-ui/icons/Help';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Logout from '../auth/LogoutDrawer'
+import CachedIcon from '@material-ui/icons/Cached';
+import {changeAccess} from '../../util/auth'
 
 const drawerWidth = 240;
 
@@ -68,6 +70,8 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -171,7 +175,7 @@ function ResponsiveDrawer(props) {
           </IconButton>
           <Typography variant="h6" noWrap>
             
-            {props.title}
+            {props.title} | <div id='view-reload-icon-div' onClick={()=>{changeAccess(user)}}>{user.AccessLevel} View <CachedIcon id='view-reload-icon'/></div>
 
           </Typography>
         </Toolbar>
@@ -209,7 +213,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.content ? <props.content user={props.user} /> : ''}
+        {props.content ? <props.content user={user} {...props}/> : ''}
       </main>
     </div>
   );

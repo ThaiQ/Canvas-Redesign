@@ -353,6 +353,24 @@ Resources:
           Properties:
             Path: /putSubmission
             Method: POST
+  getSubmission:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/assignments/get-submission.getSubmissionHandler
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AssignmentTable
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          TABLE: !Ref AssignmentTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /getSubmission
+            Method: POST
 
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable

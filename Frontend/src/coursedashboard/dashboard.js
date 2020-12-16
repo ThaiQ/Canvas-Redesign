@@ -27,8 +27,8 @@ function App(props) {
     }
 
     return (
-        <div className="App"> {console.log(courseText)}
-            <Nav title={courseText?courseText.Description.text:''} content={Grid}></Nav>
+        <div className="App">
+            <Nav title={courseText?courseText.Description.text:''} courseID={courseID} content={Grid}></Nav>
         </div>
     );
 }

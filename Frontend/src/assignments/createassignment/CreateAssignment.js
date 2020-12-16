@@ -1,26 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { checkLogin } from '../../util/auth'
+import { checkLogin, checkTeacher } from '../../util/auth'
 import './CreateAssignment.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 const axios = require("axios")
 
-export default function CreateAssignment() {
+export default function CreateAssignment(props) {
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '');
     useEffect(() => {
         checkLogin(user) //redirect user to homepage if not login
+        checkTeacher(user)
         console.log(user)
     }, [])
+    const params = props.match.params
     const [Name, setAssignmentName] = useState('')
     const [Description, setAssignmentDesc] = useState('')
     const [Points, setNumPoints] = useState('')
     const [DueDate, setDueDate] = useState('')
     const [Category, setCategory] = useState('')
-    const [CourseID, setCourseID] = useState('')
+    const [Closed, setClosed] = useState('')
     async function click() {
-        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, CourseID, Closed: 1 });
+        const body = JSON.stringify({ Name, Description, Points, DueDate, Category, Questions:[], CourseID:params.courseid, Submissions:[], Closed:Closed });
         console.log(user)
+        console.log(body)
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
         console.log(res.data)
+        if (Category === "Homework") {
+            window.location.href = "/viewassignments/".concat(params.courseid)
+        }
+        else {
+            window.location.href = "/viewquizzes/".concat(params.courseid)
+        }
     }
 
     return (
@@ -51,10 +60,12 @@ export default function CreateAssignment() {
                         <option>Quiz</option>
                         <option>Test</option>
                     </Input>
-                    <FormGroup>
-                        <Label for="courseID">Course </Label>
-                        <Input type="text" name="courseid" className="formElement" onChange={(event) => { setCourseID(event.target.value) }} id="courseid" placeholder="Course" />
-                    </FormGroup>
+                    <Label for="closed">Closed </Label>
+                    <Input type="select" name="Closed" className="formElement dropdown" onChange={(event) => { setClosed(event.target.value) }} id="closed">
+                        <option value="" selected disabled hidden>Select Closed</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </Input>
                     <FormGroup check row>
                         <Button onClick={() => { click() }} id="submit">Submit</Button>
                     </FormGroup>

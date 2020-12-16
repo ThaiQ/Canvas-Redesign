@@ -32,9 +32,6 @@ exports.putSubmissionHandler = async (event, context, callback) => {
     else if (!StudentID) {
         return errFormat(statusCode.BadRequest,`Missing StudentID.`,callback)
     }
-    else if (!SubmissionID) {
-        return errFormat(statusCode.BadRequest,`Missing SubmissionID.`,callback)
-    }
     else if (!FilePath && !Answers) {
         return errFormat(statusCode.BadRequest, `Missing Submission.`, callback)
     }

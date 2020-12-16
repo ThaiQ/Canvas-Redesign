@@ -30,4 +30,19 @@
   .App-link {
     color: #61dafb;
   }
-  
+  .buttondiv {
+    width: 15vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .buttondivsmall {
+    width: 10vw;
+    display: inline-block;
+  }
+  .buttondivmed {
+    width: 12vw;
+    display: inline-block;
+  }
+  .assignmentDetails {
+    font-size: 28px;
+  }
