@@ -40,7 +40,12 @@ export default function EditAssignment(props) {
                                         Submissions:Assignment.Submissions, 
                                         Closed:Closed||Assignment.Closed });
         let res = await axios.post("https://bvr02h55bk.execute-api.us-east-1.amazonaws.com/Prod/putAssignment", body)
-        window.location.href = "/viewAssignments/".concat(Assignment.CourseID.toString())
+        if (Assignment.Category === "Homework") {
+            window.location.href = "/viewassignments/".concat(Assignment.CourseID.toString())
+        }
+        else {
+            window.location.href = "/viewquizzes/".concat(Assignment.CourseID.toString())
+        }
     }
     //let editAssign=() => {
         return (

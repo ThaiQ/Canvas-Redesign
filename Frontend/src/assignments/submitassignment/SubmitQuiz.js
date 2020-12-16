@@ -49,7 +49,7 @@ export default function SubmitAssignment(props) {
                         return (
                             element.QuestionType === "Free Response"? (
                             <FormGroup>
-                                <Label for="assignmentAnswers"> Question {index}: {element.Description}</Label>
+                                <Label for="assignmentAnswers"> Question {index + 1}: {element.Description}</Label>
                                 <Input type="textarea" name="ans" className="formElement" onChange={(event) => {
                                     let temp = Answers
                                     temp[index] = event.target.value
@@ -59,7 +59,7 @@ export default function SubmitAssignment(props) {
                             </FormGroup>
                             ):element.QuestionType === "Multiple Choice"? (
                             <FormGroup>
-                                <Label> Question {index}: {element.Description}</Label>
+                                <Label> Question {index + 1}: {element.Description}</Label>
                                 <FormGroup>
                                     <Label check>
                                         <Input type="radio" name="radio1" value = "A" onClick={event => (multClick(index, event))}/>{' '}
