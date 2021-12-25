@@ -44,6 +44,8 @@ cd ./Frontend
 npm install
 npm start
 ```
+# Demo
+https://www.youtube.com/watch?v=l12VM_q69ss&ab_channel=Rollin%27Potato
 
 ## Visit Git Repository
 [https://github.com/ThaiQ/cmpe133project](https://github.com/ThaiQ/cmpe133project)
